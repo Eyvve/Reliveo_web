@@ -1,0 +1,37 @@
+.Showcase {
+    background-color: #161616;
+    min-height: 100vh;
+    &__TopBar{
+        height: 75px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 80px ;
+        padding-right: 80px ;
+
+        &_logo{
+            height: 75px;
+        }
+
+        &_nav{
+            border: green;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            height: 100%;
+            &_text{
+                font-size: 17px;
+                vertical-align: middle;
+                text-decoration: none;
+                color: #FFF;
+                font-weight: 500;
+                &:hover{
+                    color: #A65AFF;
+                }
+            }
+            &_badge{
+                height: 100%;
+            }
+        }
+    }
+}

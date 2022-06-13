@@ -1,8 +1,13 @@
 import React from 'react'
+import ShowCaseTopBar from './ShowCaseTopBar'
+
+import './showcase.scss'
 
 function ShowCase() {
   return (
-    <div>ShowCase</div>
+    <div className='Showcase'>
+      <ShowCaseTopBar />
+    </div>
   )
 }
 

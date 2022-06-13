@@ -25,14 +25,14 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <ShowIfDisconnected>
+        {/* <ShowIfDisconnected> */}
           <Routes>
-              <Route path="/showCase" element={<ShowCase />} />
+              <Route path="/" element={<ShowCase />} />
               <Route path="/streamingApplication" element={<StreamingApplication />} />
               <Route path="/login" element={<LogIn />} />
           </Routes>
-        </ShowIfDisconnected>
-        <ShowIfConnected>
+        {/* </ShowIfDisconnected> */}
+        {/* <ShowIfConnected>
           <ShowIfAdmin>
             <StreamerTopBar />
             <StreamerSideBar />
@@ -51,7 +51,7 @@ function App() {
               <Route path="/webapp/streamer/eventApplication" element={<MyEventApplication />} />
             </Routes>
           </ShowIfStreamer>
-        </ShowIfConnected>
+        </ShowIfConnected> */}
       </BrowserRouter>
     </div>
   );
