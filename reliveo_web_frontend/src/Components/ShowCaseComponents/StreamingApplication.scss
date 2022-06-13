@@ -1,0 +1,17 @@
+.Application{
+    height: 100vh;
+    display: flex;
+    &__left{
+        width: 50%;
+        &_top{
+            height: 75px;
+            display: flex;
+            align-items: center;
+            padding-left: 80px ;
+        }
+    }
+    &__right{
+        width: 50%;
+        background-color: #2E2E2E;
+    }
+}
