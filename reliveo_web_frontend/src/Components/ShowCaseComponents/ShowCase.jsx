@@ -22,39 +22,40 @@ function ShowCase() {
     <div className='Showcase'>
       <ShowCaseTopBar />
       <div className='Showcase__container'>
-
         <section className='Showcase__container_section1'>
-          <div className='Showcase__container_section1_left'>
-            <h1>Souhaitez-vous avoir la meilleure qualité sonore pour vos stories ?</h1>
-            <p>Reliveo vous permet de directement récupérer l’audio d’un concert 
-              ou d’un festival pour l’ajouter à votre vidéo. 
-              Partagez vos plus beaux moments ou diffusez votre 
-              évènement pour que tous puissent en profiter</p>  
-          </div>
-          <div className='Showcase__container_section1_right'>
-            <Illustration />
-          </div>
-        </section>
-        
-        <section className='Showcase__container_partners'>
-          <h5>Nos Partenaires</h5>
-          <br></br>
-          <div className='Showcase__container_partners_list'>
-            <img src={hFLogo}/>
-            <h2>|</h2>
-            <img src={llpzLogo}/>
-            <h2>|</h2>
-            <img src={mJFLogo}/>
-            <h2>|</h2>
-            <img src={reSLogo}/>
-            <h2>|</h2>
-            <img src={tLLogo}/>
-            <h2>|</h2>
-            <img src={vcLogo}/>
-            <h2>|</h2>
-            <img src={sDLogo}/>
+          <div className='Showcase__container_section1_top'>
+            <div className='Showcase__container_section1_top_left'>
+              <h1>Souhaitez-vous avoir la meilleure qualité sonore pour vos stories ?</h1>
+              <p>Reliveo vous permet de directement récupérer l’audio d’un concert 
+                ou d’un festival pour l’ajouter à votre vidéo. 
+                Partagez vos plus beaux moments ou diffusez votre 
+                évènement pour que tous puissent en profiter
+              </p>  
+            </div>
+            <div className='Showcase__container_section1_top_right'>
+              <Illustration />
+            </div>
           </div>
           
+          <div className='Showcase__container_partners'>
+            <h5>Nos Partenaires</h5>
+            <br></br>
+            <div className='Showcase__container_partners_list'>
+              <img src={hFLogo}/>
+              <h2>|</h2>
+              <img src={llpzLogo}/>
+              <h2>|</h2>
+              <img src={mJFLogo}/>
+              <h2>|</h2>
+              <img src={reSLogo}/>
+              <h2>|</h2>
+              <img src={tLLogo}/>
+              <h2>|</h2>
+              <img src={vcLogo}/>
+              <h2>|</h2>
+              <img src={sDLogo}/>
+            </div>
+          </div>
         </section>
       </div>
     </div>

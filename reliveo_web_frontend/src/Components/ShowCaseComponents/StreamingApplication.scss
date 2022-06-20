@@ -8,10 +8,53 @@
             display: flex;
             align-items: center;
             padding-left: 80px ;
+            margin-bottom: 80px;
+        }
+        &_step{
+            width: 45%;
+            // height: 70%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            &_title{
+                color: #A65AFF;
+                text-align: left;
+                font-size: 38px;
+            }
+            &_subtitle{
+                text-align: left;
+
+            }
+            &_hr{
+                margin-bottom: 10%;
+            }
+            &_selector{
+                margin-bottom: 15%;
+                
+            }
+            &_button{
+                width: 100%;
+                height: 50px;
+                border-radius: 25px;
+                background-color: #A65AFF;
+                border: #8B29FF;
+                color: #F2F2F2;
+                font-weight: 600;
+            }
+        }
+        &_step2{
+            width: 45%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
         }
     }
     &__right{
         width: 50%;
+        height: 100%;
         background-color: #2E2E2E;
     }
 }
