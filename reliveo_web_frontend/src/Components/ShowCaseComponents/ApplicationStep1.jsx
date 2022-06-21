@@ -1,26 +1,37 @@
 import {React, useState, useEffect} from 'react'
 import './StreamingApplication.scss'
 import Select from 'react-select'
+import { useNavigate } from 'react-router-dom'
 
 import { eventType } from '../../Data/data'
 
 
-import {Redirect} from 'react-router-dom'
+function ApplicationStep1({setLocalApplicationForm, importedData}) {
 
-function ApplicationStep1({setLocalApplicationForm}) {
+  
+  const navigate = useNavigate()
 
-  const [localEventType, setlocalEventType] = useState("");
+  const [localEventType, setlocalEventType] = useState({value: 'default', label: "Select..."});
 
-  // useEffect(() => {
-  //     console.log(localEventType.value)
-  // });
+  const handlePrevious = (e => {
+    return navigate('/')
+  })
+
+  const handleNext = (e => {
+    return navigate('/streamingApplication/step2')
+  })
 
   useEffect(() => {
+    console.log(localEventType)
     setLocalApplicationForm(prev => ({
           ...prev,
-          eventType: localEventType.value
+          eventType: localEventType
         }))
   },[localEventType]);
+
+  useEffect(() => {
+    setlocalEventType(importedData)
+  },[]);
 
   return (
     <div className='Application__left_step'>
@@ -31,9 +42,20 @@ function ApplicationStep1({setLocalApplicationForm}) {
         <hr className='Application__left_step_hr'></hr>
         <Select className='Application__left_step_selector'
           options={eventType}
-          onChange={setlocalEventType}/>
-          <br></br>
-        {/* <button className='Application__left_step1_button' onClick={setlocalEventType}>Suivant</button> */}
+          value={localEventType}
+          onChange={setlocalEventType}
+        />
+        <br></br>
+        <div className='Application__left_step_buttons'>
+          <button className='Application__left_step_buttons_button previous' 
+            onClick={handlePrevious}>
+              Page d'accueil
+          </button>
+          <button className='Application__left_step_buttons_button next' 
+            onClick={handleNext}>
+              Suivant
+          </button>
+        </div>
       </div>
     </div>
   )

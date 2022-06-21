@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import ShowCaseTopBar from './ShowCaseTopBar'
 import {ReactComponent as Illustration} from '../../Assets/ShowCase/showcase_illustration.svg'
 
@@ -12,11 +12,19 @@ import sDLogo from '../../Assets/ShowCase/solidays_logo.svg'
 
 import './showcase.scss'
 
-function ShowCase() {
+function ShowCase({setLocalApplicationForm}) {
 
-  const partnerImages = [
-
-  ]
+  useEffect(() => {
+    setLocalApplicationForm({
+      eventType: "",
+      streamerName: "",
+      genreList: [],
+      profilePicture: [],
+      officialWebsite: "",
+      description: "",
+      identityProof: ""
+    })
+  }, []);
 
   return (
     <div className='Showcase'>

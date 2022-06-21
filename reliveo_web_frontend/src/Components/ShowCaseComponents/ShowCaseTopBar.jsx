@@ -10,7 +10,7 @@ function ShowCaseTopBar() {
     <nav className="Showcase__TopBar">
       <Link to="/" ><BrandLogo className="Showcase__TopBar_logo" /></Link>
       <section className='Showcase__TopBar_nav'>
-        <Link className='Showcase__TopBar_nav_text' to="/streamingApplication" >DEVENIR DIFFUSEUR</Link>
+        <Link className='Showcase__TopBar_nav_text' to="/streamingApplication/step1" >DEVENIR DIFFUSEUR</Link>
         <Link className='Showcase__TopBar_nav_text' to="/Login" >CONNEXION</Link>
         <a href=''><AppStoreBadge className="Showcase__TopBar_nav_badge" /></a>
         <a href=''><GooglePlayBadge className="Showcase__TopBar_nav_badge" /></a>
