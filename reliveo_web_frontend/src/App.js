@@ -10,6 +10,7 @@ import ApplicationStep2 from './Components/ShowCaseComponents/ApplicationStep2'
 import ApplicationStep3 from './Components/ShowCaseComponents/ApplicationStep3'
 import ApplicationStep4 from './Components/ShowCaseComponents/ApplicationStep4'
 import ApplicationStep5 from './Components/ShowCaseComponents/ApplicationStep5'
+import ApplicationStep6 from './Components/ShowCaseComponents/ApplicationStep6'
 import ShowIfAdmin from './Components/AdminComponents/ShowIfAdmin';
 import ShowIfStreamer from './Components/StreamerComponents/ShowIfStreamer';
 import StreamerTopBar from './Components/StreamerComponents/StreamerTopBar'
@@ -46,13 +47,37 @@ function App() {
       <BrowserRouter>
         {/* <ShowIfDisconnected> */}
           <Routes>
-              <Route path="/" element={<ShowCase setLocalApplicationForm={setLocalApplicationForm} />} />
+              <Route path="/" element={<ShowCase 
+                setLocalApplicationForm={setLocalApplicationForm} />} />
               <Route path="/streamingApplication" element={<StreamingApplication />}>
-                <Route path="/streamingApplication/step1" element={<ApplicationStep1 setLocalApplicationForm={setLocalApplicationForm} importedData={localApplicationForm.eventType} />} />
-                <Route path="/streamingApplication/step2" element={<ApplicationStep2 setLocalApplicationForm={setLocalApplicationForm} importedNameData={localApplicationForm.streamerName} importedGenreData={localApplicationForm.genreList} localApplicationForm={localApplicationForm} />} />
-                <Route path="/streamingApplication/step3" element={<ApplicationStep3 setLocalApplicationForm={setLocalApplicationForm} importedData={localApplicationForm} importedPPData={localApplicationForm.profilePicture}  />} />
-                <Route path="/streamingApplication/step4" element={<ApplicationStep4 setLocalApplicationForm={setLocalApplicationForm} importedData={localApplicationForm} importedProofData={localApplicationForm.identityProof}  />} />
-                <Route path="/streamingApplication/step5" element={<ApplicationStep5 setLocalApplicationForm={setLocalApplicationForm} importedData={localApplicationForm}  />} />
+                <Route path="/streamingApplication/step1" element={<ApplicationStep1 
+                  setLocalApplicationForm={setLocalApplicationForm} 
+                  importedData={localApplicationForm.eventType} />} />
+                <Route path="/streamingApplication/step2" element={<ApplicationStep2 
+                  setLocalApplicationForm={setLocalApplicationForm} 
+                  importedNameData={localApplicationForm.streamerName} 
+                  importedGenreData={localApplicationForm.genreList} 
+                  localApplicationForm={localApplicationForm} />} />
+                <Route path="/streamingApplication/step3" element={<ApplicationStep3 
+                  setLocalApplicationForm={setLocalApplicationForm} 
+                  importedData={localApplicationForm} 
+                  importedPPData={localApplicationForm.profilePicture}  />} />
+                <Route path="/streamingApplication/step4" element={<ApplicationStep4 
+                  setLocalApplicationForm={setLocalApplicationForm} 
+                  importedData={localApplicationForm} 
+                  importedProofData={localApplicationForm.identityProof} 
+                  importedLinkData={localApplicationForm.officialWebsite} 
+                  importedDescriptionData={localApplicationForm.description} />} />
+                <Route path="/streamingApplication/step5" element={<ApplicationStep5 
+                  eventType={localApplicationForm.eventType.label}
+                  streamerName={localApplicationForm.streamerName}
+                  genreList={localApplicationForm.genreList}
+                  profilePicture={localApplicationForm.profilePicture.path}
+                  officialWebsite={localApplicationForm.officialWebsite}
+                  description={localApplicationForm.description}
+                  identityProof={localApplicationForm.identityProof.path} />} />
+                <Route path="/streamingApplication/step6" element={<ApplicationStep6 
+                  importedData={localApplicationForm}  />} />
               </Route>
               <Route path="/login" element={<LogIn />} />
           </Routes>

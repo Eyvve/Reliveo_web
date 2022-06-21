@@ -2,24 +2,22 @@ import React, {useEffect, useState} from 'react'
 import {useDropzone} from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 
-function ApplicationStep4({setLocalApplicationForm, importedProofData}) {
+function ApplicationStep4({setLocalApplicationForm, importedProofData, importedDescriptionData, importedLinkData}) {
 
   const navigate = useNavigate()
 
-  const [file, setFile] = useState();
-
   const handleWebsiteLinkChange = (e => {
     setLocalApplicationForm(prev => ({
-        ...prev,
-        officialWebsite: e.target.value
-      }))
+      ...prev,
+      officialWebsite: e.target.value
+    }))
   })
 
   const handleDescriptionChange = (e => {
     setLocalApplicationForm(prev => ({
-        ...prev,
-        description: e.target.value
-      }))
+      ...prev,
+      description: e.target.value
+    }))
   })
 
   const {
@@ -31,18 +29,13 @@ function ApplicationStep4({setLocalApplicationForm, importedProofData}) {
     accept: {
       'application/pdf': []
     },
-    onDrop: acceptedFiles => {
-      setFile(acceptedFiles.map(file => Object.assign(file, {
-        preview: URL.createObjectURL(file)
-      })))
-    },  
+    // onDrop: acceptedFiles => {
+    //   setFile(acceptedFiles.map(file => Object.assign(file, {
+    //     preview: URL.createObjectURL(file)
+    //   })))
+    // },  
     maxFiles: 3
   });
-
-
-  useEffect(() => {
-    setFile(importedProofData);
-  }, []);
 
   const acceptedFileItems = acceptedFiles.map(file => (
     <li key={file.path} className="fileList success">
@@ -83,12 +76,12 @@ function ApplicationStep4({setLocalApplicationForm, importedProofData}) {
 
       <h3 className='Application__left_step_subtitle'>Site officiel</h3>
       <hr className='Application__left_step_hr'></hr>
-      <input className='Application__left_step_inputText' type="text" name="officialWebsite" onChange={handleWebsiteLinkChange} />
+      <input value={importedLinkData} className='Application__left_step_inputText' type="text" name="officialWebsite" onChange={handleWebsiteLinkChange} />
       <br></br>
 
       <h3 className='Application__left_step_subtitle'>Fournissez une description</h3>
       <hr className='Application__left_step_hr'></hr>
-      <textarea name="streamerName" onChange={handleDescriptionChange} className='Application__left_step_textfield'/>
+      <textarea value={importedDescriptionData} name="streamerName" onChange={handleDescriptionChange} className='Application__left_step_textfield'/>
       <br></br>
 
       <h3 className='Application__left_step_subtitle'>Justificatif</h3>
