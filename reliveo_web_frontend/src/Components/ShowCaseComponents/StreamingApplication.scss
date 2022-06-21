@@ -42,6 +42,27 @@
                 color: #F2F2F2;
                 font-weight: 600;
             }
+            &_previewContainer{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                
+                &>div>div>img{
+                    background-color: black;
+                    height: 150px;
+                    width: 150px;
+                    object-fit:cover;
+                    border-radius: 50%;
+                }
+            }
+            &_dragndrop{
+                border: 1px dashed gray;
+                height: 100px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
         }
         &_step2{
             width: 45%;

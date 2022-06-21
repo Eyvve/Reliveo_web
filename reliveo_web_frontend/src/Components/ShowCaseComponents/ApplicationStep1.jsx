@@ -1,6 +1,10 @@
 import {React, useState, useEffect} from 'react'
 import './StreamingApplication.scss'
 import Select from 'react-select'
+
+import { eventType } from '../../Data/data'
+
+
 import {Redirect} from 'react-router-dom'
 
 function ApplicationStep1({setLocalApplicationForm}) {
@@ -18,11 +22,6 @@ function ApplicationStep1({setLocalApplicationForm}) {
         }))
   },[localEventType]);
 
-  const options = [
-    {value: 'musicalArtist', label: "Un groupe ou un artiste musical"},
-    {value: 'festival', label: "Un festival"}
-  ]
-
   return (
     <div className='Application__left_step'>
       <div>
@@ -31,8 +30,9 @@ function ApplicationStep1({setLocalApplicationForm}) {
         <h3 className='Application__left_step_subtitle'>Selectionnez le type de diffuseur</h3>
         <hr className='Application__left_step_hr'></hr>
         <Select className='Application__left_step_selector'
-          options={options}
+          options={eventType}
           onChange={setlocalEventType}/>
+          <br></br>
         {/* <button className='Application__left_step1_button' onClick={setlocalEventType}>Suivant</button> */}
       </div>
     </div>
