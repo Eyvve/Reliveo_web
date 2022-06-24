@@ -54,10 +54,10 @@ function ApplicationStep5({localApplicationForm, eventType, streamerName, genreL
                 <td>Description</td>
                 <td>{description}</td>
             </tr>
-            <tr>
+            {/* <tr>
                 <td>Preuve d'identité</td>
                 <td>{localProof}</td>
-            </tr>
+            </tr> */}
         </tbody>
       </table>
       <br />

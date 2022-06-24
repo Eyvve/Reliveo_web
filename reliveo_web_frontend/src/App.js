@@ -17,6 +17,7 @@ import ApplicationStep3 from './Components/ShowCaseComponents/ApplicationStep3'
 import ApplicationStep4 from './Components/ShowCaseComponents/ApplicationStep4'
 import ApplicationStep5 from './Components/ShowCaseComponents/ApplicationStep5'
 import ApplicationStep6 from './Components/ShowCaseComponents/ApplicationStep6'
+import Login from './Components/Auth/Login';
 
 function App() {
 
@@ -63,7 +64,7 @@ function App() {
                   importedProofData={localApplicationForm.identityProof} 
                   importedLinkData={localApplicationForm.officialWebsite} 
                   importedDescriptionData={localApplicationForm.description} />} />
-                <Route path="/streamingApplication/step5" element={<ApplicationStep5 
+                {/* <Route path="/streamingApplication/step5" element={<ApplicationStep5 
                   eventType={localApplicationForm.eventType.label}
                   streamerName={localApplicationForm.streamerName}
                   genreList={localApplicationForm.genreList}
@@ -71,11 +72,11 @@ function App() {
                   officialWebsite={localApplicationForm.officialWebsite}
                   description={localApplicationForm.description}
                   identityProof={localApplicationForm.identityProof[0].file.name}
-                  importedData={localApplicationForm} />} />
+                  importedData={localApplicationForm} />} /> */}
                 <Route path="/streamingApplication/step6" element={<ApplicationStep6 
                   importedData={localApplicationForm}  />} />
               </Route>
-              {/* <Route path="/login" element={<LogIn />} /> */}
+              <Route path="/login" element={<Login />} ></ Route>
           </Routes>
         {/* </ShowIfDisconnected> */}
         {/* <ShowIfConnected> */}

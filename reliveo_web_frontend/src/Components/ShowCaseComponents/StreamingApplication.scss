@@ -138,6 +138,11 @@
                     padding: 10px;
                 }
             }
+            &_form{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
         }
         &_step2{
             width: 45%;
