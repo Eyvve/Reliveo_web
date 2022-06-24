@@ -1,10 +1,5 @@
-import {React, useState, useEffect} from 'react'
-import ApplicationStep1 from './ApplicationStep1'
-import ApplicationStep2 from './ApplicationStep2'
-import ApplicationStep3 from './ApplicationStep3'
-import ApplicationStep4 from './ApplicationStep4'
-import ApplicationStep5 from './ApplicationStep6'
-import {Routes, Link, Route, Outlet} from 'react-router-dom'
+import {React} from 'react'
+import {Link, Outlet} from 'react-router-dom'
 import {ReactComponent as ReliveoLogo} from '../../Assets/ShowCase/reliveo_application_logo.svg'
 
 import './StreamingApplication.scss'

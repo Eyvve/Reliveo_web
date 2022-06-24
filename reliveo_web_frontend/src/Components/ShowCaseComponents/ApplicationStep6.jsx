@@ -1,17 +1,26 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
+import useSubmitStreamerApplication from '../../Hooks/useSubmitStreamerApplication';
 
-function ApplicationStep6({ localApplicationForm}) {
+function ApplicationStep6({localApplicationForm}) {
 
   const navigate = useNavigate()
+  // const apply = useSubmitStreamerApplication()
 
   const handlePrevious = (e => {
     return navigate('/streamingApplication/step4')
   })
 
   const handleSubmit = (e => {
+    // apply(localApplicationForm)
+    //   .then(data => {
+    //   console.log(data)
     return navigate('/')
   })
+
+  useEffect(() => {
+    console.log(localApplicationForm)
+  }, []);
 
   return (
     <section className='Application__left_step'>

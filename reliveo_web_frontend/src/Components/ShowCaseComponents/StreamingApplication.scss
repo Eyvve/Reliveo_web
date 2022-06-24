@@ -132,6 +132,12 @@
                 padding: 0;
                 justify-self: start;
             }
+            &_table, &_table>tbody>tr, &_table>tbody>tr>td{
+                border: 1px solid black;
+                &>tbody>tr>td{
+                    padding: 10px;
+                }
+            }
         }
         &_step2{
             width: 45%;

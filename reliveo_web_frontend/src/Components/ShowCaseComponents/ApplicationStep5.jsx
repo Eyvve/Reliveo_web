@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function ApplicationStep5({eventType, streamerName, genreList, profilePicture, officialWebsite, description, identityProof}) {
+function ApplicationStep5({localApplicationForm, eventType, streamerName, genreList, profilePicture, officialWebsite, description, identityProof}) {
 
   const navigate = useNavigate()
 
-  const [tempGenreList, setTempGenreList] = useState();
+  const [localProof, setLocalProof] = useState();
+  
+  useEffect(() => {
+    setLocalProof(identityProof)
+    console.log(localProof)
+  }, []);
 
   const handlePrevious = (e => {
     return navigate('/streamingApplication/step4')
@@ -15,18 +20,13 @@ function ApplicationStep5({eventType, streamerName, genreList, profilePicture, o
     return navigate('/streamingApplication/step6')
   })
 
-  useEffect(() => {
-    console.log(tempGenreList)
-    setTempGenreList(genreList)
-  }, []);
-
   return (
     <section className='Application__left_step'>
       <h1 className='Application__left_step_title'>Résumé</h1>
       <hr className='Application__left_step_hr'></hr>
       <br />
 
-      <table>
+      <table className='Application__left_step_table'>
         <tbody>
             <tr>
                 <td>Type d'évènement</td>
@@ -38,8 +38,8 @@ function ApplicationStep5({eventType, streamerName, genreList, profilePicture, o
             </tr>
             <tr>
                 <td>Genres musicaux</td>
-                <td>{tempGenreList?.map((genre, index) => {
-                   <p key={index}>{genre.value}</p>
+                <td>{genreList.map((genre, index) => {
+                   return <p key={index}>{genre.value}</p>
                 })}</td>
             </tr>
             <tr>
@@ -56,10 +56,11 @@ function ApplicationStep5({eventType, streamerName, genreList, profilePicture, o
             </tr>
             <tr>
                 <td>Preuve d'identité</td>
-                <td>{identityProof}</td>
+                <td>{localProof}</td>
             </tr>
         </tbody>
       </table>
+      <br />
 
       <div className='Application__left_step_buttons'>
         <button className='Application__left_step_buttons_button previous' 

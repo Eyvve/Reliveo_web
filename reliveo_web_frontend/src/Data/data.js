@@ -13,3 +13,12 @@ export const eventType = [
     {value: 'musicalArtist', label: "Un groupe ou un artiste musical"},
     {value: 'festival', label: "Un festival"}
   ]
+
+export const menuItems = [
+    {
+        title: "Déconnexion"
+    },
+    {
+        title: "Site vitrine"
+    }
+];

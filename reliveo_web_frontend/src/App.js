@@ -2,35 +2,25 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import {Routes, Link, Route, BrowserRouter} from 'react-router-dom'
-import ShowIfDisconnected from './Components/LogConditions/ShowIfDisconnected'
-import ShowIfConnected from './Components/LogConditions/ShowIfConnected';
-import ShowCase from './Components/ShowCaseComponents/ShowCase'
+import AdminPage from './Components/AdminComponents/AdminPage';
+import UserManager from './Components/AdminComponents/UserManager';
+import ContentManager from './Components/AdminComponents/ContentManager';
+import EventManager from './Components/AdminComponents/EventManager';
+import StreamerManager from './Components/AdminComponents/StreamerManager';
+import UserList from './Components/AdminComponents/UserList';
+import CreateUser from './Components/AdminComponents/CreateUser';
+import ShowCase from './Components/ShowCaseComponents/ShowCase';
+import StreamingApplication from './Components/ShowCaseComponents/StreamingApplication';
 import ApplicationStep1 from './Components/ShowCaseComponents/ApplicationStep1'
 import ApplicationStep2 from './Components/ShowCaseComponents/ApplicationStep2'
 import ApplicationStep3 from './Components/ShowCaseComponents/ApplicationStep3'
 import ApplicationStep4 from './Components/ShowCaseComponents/ApplicationStep4'
 import ApplicationStep5 from './Components/ShowCaseComponents/ApplicationStep5'
 import ApplicationStep6 from './Components/ShowCaseComponents/ApplicationStep6'
-import ShowIfAdmin from './Components/AdminComponents/ShowIfAdmin';
-import ShowIfStreamer from './Components/StreamerComponents/ShowIfStreamer';
-import StreamerTopBar from './Components/StreamerComponents/StreamerTopBar'
-import StreamerSideBar from './Components/StreamerComponents/StreamerSideBar'
-import UserManager from './Components/AdminComponents/UserManager';
-import ContentManager from './Components/AdminComponents/ContentManager';
-import EventManager from './Components/AdminComponents/EventManager';
-import StreamerManager from './Components/AdminComponents/StreamerManager';
-import StreamingApplication from './Components/ShowCaseComponents/StreamingApplication';
-import LogIn from './Components/ShowCaseComponents/LogIn';
-import MyEventApplication from './Components/StreamerComponents/MyEventApplication';
-import MyEventManager from './Components/StreamerComponents/MyEventManager';
 
 function App() {
 
   const [logStatus, setLogStatus] = useState(false);
-  
-  useEffect(() => {
-    console.log(localApplicationForm)
-  });
 
   const [localApplicationForm, setLocalApplicationForm] = useState({
     eventType: "",
@@ -41,6 +31,11 @@ function App() {
     description: "",
     identityProof: ""
   });
+
+  useEffect(() => {
+    // console.log(localApplicationForm.identityProof[0].path)
+    console.log(localApplicationForm.identityProof)
+  }, [localApplicationForm]);
 
   return (
     <div className="App">
@@ -72,36 +67,46 @@ function App() {
                   eventType={localApplicationForm.eventType.label}
                   streamerName={localApplicationForm.streamerName}
                   genreList={localApplicationForm.genreList}
-                  profilePicture={localApplicationForm.profilePicture.path}
+                  profilePicture={localApplicationForm.profilePicture}
                   officialWebsite={localApplicationForm.officialWebsite}
                   description={localApplicationForm.description}
-                  identityProof={localApplicationForm.identityProof.path} />} />
+                  identityProof={localApplicationForm.identityProof[0].file.name}
+                  importedData={localApplicationForm} />} />
                 <Route path="/streamingApplication/step6" element={<ApplicationStep6 
                   importedData={localApplicationForm}  />} />
               </Route>
-              <Route path="/login" element={<LogIn />} />
+              {/* <Route path="/login" element={<LogIn />} /> */}
           </Routes>
         {/* </ShowIfDisconnected> */}
-        {/* <ShowIfConnected>
-          <ShowIfAdmin>
-            <StreamerTopBar />
-            <StreamerSideBar />
+        {/* <ShowIfConnected> */}
+          {/* <ShowIfAdmin> */}
             <Routes>
-              <Route path="/webapp/admin/userManager" element={<UserManager />} />
-              <Route path="/webapp/admin/contentManager" element={<ContentManager />} />
-              <Route path="/webapp/admin/eventManager" element={<EventManager />} />
-              <Route path="/webapp/admin/streamerManager" element={<StreamerManager />} />
+              <Route path="/webapp/admin/" element={<AdminPage />}>
+                <Route path="/webapp/admin/userManager" element={<UserManager />}>
+                  <Route path="/webapp/admin/userManager/userList" element={<UserList />} />
+                  <Route path="/webapp/admin/userManager/createUser" element={<CreateUser />} />
+                </Route>
+                <Route path="/webapp/admin/contentManager" element={<ContentManager />}>
+                  {/* <Route path="/" element={} /> */}
+                </Route>
+                <Route path="/webapp/admin/eventManager" element={<EventManager />}>
+                  {/* <Route path="/" element={} /> */}
+                </Route>
+                <Route path="/webapp/admin/streamerManager" element={<StreamerManager />}>
+                  {/* <Route path="/" element={} /> */}
+                </Route>
+              </Route>
             </Routes>
-          </ShowIfAdmin>
-          <ShowIfStreamer>
+          {/* </ShowIfAdmin> */}
+          {/* <ShowIfStreamer>
             <StreamerTopBar />
             <StreamerSideBar />
             <Routes>
               <Route path="/webapp/streamer/eventManager" element={<MyEventManager />} />
               <Route path="/webapp/streamer/eventApplication" element={<MyEventApplication />} />
             </Routes>
-          </ShowIfStreamer>
-        </ShowIfConnected> */}
+          </ShowIfStreamer> */}
+        {/* </ShowIfConnected> */}
       </BrowserRouter>
     </div>
   );
