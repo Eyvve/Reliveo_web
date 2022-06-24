@@ -5,13 +5,6 @@ function ApplicationStep5({localApplicationForm, eventType, streamerName, genreL
 
   const navigate = useNavigate()
 
-  const [localProof, setLocalProof] = useState();
-  
-  useEffect(() => {
-    setLocalProof(identityProof)
-    console.log(localProof)
-  }, []);
-
   const handlePrevious = (e => {
     return navigate('/streamingApplication/step4')
   })
@@ -19,6 +12,10 @@ function ApplicationStep5({localApplicationForm, eventType, streamerName, genreL
   const handleNext = (e => {
     return navigate('/streamingApplication/step6')
   })
+
+  useEffect(() => {
+    console.log(identityProof)
+  }, []);
 
   return (
     <section className='Application__left_step'>
@@ -44,7 +41,7 @@ function ApplicationStep5({localApplicationForm, eventType, streamerName, genreL
             </tr>
             <tr>
                 <td>Image de profil</td>
-                <td>{profilePicture}</td>
+                <td>{profilePicture[0]?.path}</td>
             </tr>
             <tr>
                 <td>Lien vers le site</td>
@@ -54,10 +51,10 @@ function ApplicationStep5({localApplicationForm, eventType, streamerName, genreL
                 <td>Description</td>
                 <td>{description}</td>
             </tr>
-            {/* <tr>
+            <tr>
                 <td>Preuve d'identité</td>
-                <td>{localProof}</td>
-            </tr> */}
+                <td>{identityProof[0]?.path}</td>
+            </tr>
         </tbody>
       </table>
       <br />

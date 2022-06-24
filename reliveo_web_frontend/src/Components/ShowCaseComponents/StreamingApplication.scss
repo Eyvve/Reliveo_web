@@ -131,6 +131,9 @@
             &>aside>ul{
                 padding: 0;
                 justify-self: start;
+            } 
+            &_table{
+                width: 100%;
             }
             &_table, &_table>tbody>tr, &_table>tbody>tr>td{
                 border: 1px solid black;
