@@ -25,6 +25,11 @@ import StreamerSideBar from './Components/StreamerComponents/StreamerSideBar'
 import AppIndex from './Components/Index/AppIndex';
 import MyEventManager from './Components/StreamerComponents/MyEventManager';
 import MyEventApplication from './Components/StreamerComponents/MyEventApplication';
+import ContentList from './Components/AdminComponents/ContentList';
+import StreamerList from './Components/AdminComponents/StreamerList';
+import StreamerApplications from './Components/AdminComponents/StreamerApplications';
+import EventList from './Components/AdminComponents/EventList';
+import EventApplications from './Components/AdminComponents/EventApplications';
 
 function App() {
   
@@ -36,9 +41,9 @@ function App() {
     status: 'error',
     token: "",
     username: "",
-    status: "streamer"
+    userStatus: ""
   })
-  const [localUser, setLocalUser] = useState({password: "", username: ""})
+  const [localUser, setLocalUser] = useState({password: "", email: ""})
   const [needsLogin, setNeedsLogin] = useState(true)
 
   const [localApplicationForm, setLocalApplicationForm] = useState({
@@ -52,7 +57,7 @@ function App() {
   });
 
   useEffect(() => {
-    if (Object.keys(cookies).includes('hetic_token') && Object.keys(cookies).includes('hetic_username')) {
+    if (Object.keys(cookies).includes('ReliveoJWT')) {
         console.log('got cookies !', loggedUser)
         setLoggedUser(prev => ({
             ...prev,
@@ -66,10 +71,15 @@ function App() {
 useEffect(() => {
     if (needsLogin && localUser.username !== '') {
         console.log('login ?')
-        login(localUser.username, localUser.password)
-            // .then(data => setLoggedUser(data))
+        login(localUser.email, localUser.password)
+            .then(data => setLoggedUser(data))
+            // .then(data => console.log(data))
     }
 }, [localUser])
+
+useEffect(() => {
+  console.log(loggedUser)
+}, [loggedUser]);
 
   return (
     <div className="App">
@@ -111,7 +121,7 @@ useEffect(() => {
                 importedData={localApplicationForm}  />} />
             </Route>
 
-            <Route path="/login" element={<Login loggedUser={loggedUser} setLocalUser={setLocalUser} needsLogin={needsLogin} setNeedsLogin={setNeedsLogin} />} ></ Route>
+            <Route path="/login" element={<Login localUser={localUser} loggedUser={loggedUser} setLocalUser={setLocalUser} needsLogin={needsLogin} setNeedsLogin={setNeedsLogin} />} ></ Route>
       
             <Route path="/webapp/admin/" element={<AdminPage />}>
               <Route path="/webapp/admin/userManager" element={<UserManager />}>
@@ -119,13 +129,15 @@ useEffect(() => {
                 <Route path="/webapp/admin/userManager/createUser" element={<CreateUser />} />
               </Route>
               <Route path="/webapp/admin/contentManager" element={<ContentManager />}>
-               
-              </Route>
-              <Route path="/webapp/admin/eventManager" element={<EventManager />}>
-           
+                <Route path="/webapp/admin/contentManager/contentList" element={<ContentList />} />
               </Route>
               <Route path="/webapp/admin/streamerManager" element={<StreamerManager />}>
-               
+                <Route path="/webapp/admin/streamerManager/streamerList" element={<StreamerList />} />
+                <Route path="/webapp/admin/streamerManager/streamerApplications" element={<StreamerApplications />} />
+              </Route>
+              <Route path="/webapp/admin/eventManager" element={<EventManager />}>
+                  <Route path="/webapp/admin/eventManager/eventList" element={<EventList />} />
+                  <Route path="/webapp/admin/eventManager/eventApplications" element={<EventApplications />} />
               </Route>
             </Route>
             <Route path="/webapp/streamer/" element={<AdminPage />}>

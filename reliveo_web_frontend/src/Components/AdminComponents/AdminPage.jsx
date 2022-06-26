@@ -7,8 +7,10 @@ function AdminPage() {
   return (
     <div className='Admin'>
         <AdminTopBar />
-        <AdminSideBar />
-        <Outlet />
+        <div className='Admin__container'>
+          <AdminSideBar />
+          <Outlet />
+        </div>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import {Outlet} from 'react-router-dom'
 function UserManager() {
 
   return (
-    <div className='Admin__userManager'>
+    <div className='Admin__Manager'>
       <h4>Gestion des utilisateurs</h4>
       <UserManagerNav />
       <Outlet />
