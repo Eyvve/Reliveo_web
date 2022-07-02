@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default function useLogin() {
     return (email, password) => {
-        return axios('http://13.80.23.145/authentication_token', {
+        return axios('http://13.80.23.145/authentication_token ', {
             method: "post",
             data: {
                 email: email,

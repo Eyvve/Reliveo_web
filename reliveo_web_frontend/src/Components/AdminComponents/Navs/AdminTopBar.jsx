@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {ReactComponent as Logo} from '../../Assets/Admin/ReliveoDashboardTop.svg'
-import "./adminStyle.scss"
+import {ReactComponent as Logo} from '../../../Assets/Admin/ReliveoDashboardTop.svg'
+import "../adminStyle.scss"
 import {Link} from 'react-router-dom'
 import {Dropdown} from 'react-bootstrap'
 

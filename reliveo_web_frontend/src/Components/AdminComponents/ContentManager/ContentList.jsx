@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
-import { content } from '../../Data/fakeData'
-import {ReactComponent as Delete} from '../../Assets/Admin/delete.svg'
+import { content } from '../../../Data/fakeData'
+import {ReactComponent as Delete} from '../../../Assets/Admin/delete.svg'
 
 function ContentList() {
     

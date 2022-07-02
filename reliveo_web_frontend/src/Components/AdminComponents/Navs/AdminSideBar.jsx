@@ -1,10 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import "./adminStyle.scss"
-import {ReactComponent as Users} from '../../Assets/Admin/users.svg'
-import {ReactComponent as Content} from '../../Assets/Admin/content.svg'
-import {ReactComponent as Streamers} from '../../Assets/Admin/streamers.svg'
-import {ReactComponent as Events} from '../../Assets/Admin/events.svg'
+import "../adminStyle.scss"
+import {ReactComponent as Users} from '../../../Assets/Admin/users.svg'
+import {ReactComponent as Content} from '../../../Assets/Admin/content.svg'
+import {ReactComponent as Streamers} from '../../../Assets/Admin/streamers.svg'
+import {ReactComponent as Events} from '../../../Assets/Admin/events.svg'
 
 function AdminSideBar() {
   return (

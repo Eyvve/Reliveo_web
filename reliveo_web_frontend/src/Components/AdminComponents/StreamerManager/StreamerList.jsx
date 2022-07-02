@@ -1,6 +1,6 @@
 import React from 'react'
-import {ReactComponent as Delete} from '../../Assets/Admin/delete.svg'
-import { streamer } from '../../Data/fakeData'
+import {ReactComponent as Delete} from '../../../Assets/Admin/delete.svg'
+import { streamer } from '../../../Data/fakeData'
 
 function StreamerList() {
 

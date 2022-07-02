@@ -1,6 +1,6 @@
 import React from 'react'
-import { streamer } from '../../Data/fakeData'
-import {ReactComponent as Check} from '../../Assets/Admin/check.svg'
+import { streamer } from '../../../Data/fakeData'
+import {ReactComponent as Check} from '../../../Assets/Admin/check.svg'
 
 function StreamerApplications() {
     

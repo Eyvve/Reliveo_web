@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
-import { users } from '../../Data/fakeData'
-import {ReactComponent as Delete} from '../../Assets/Admin/delete.svg'
-import {ReactComponent as Upgrade} from '../../Assets/Admin/to_partner.svg'
-import {ReactComponent as Downgrade} from '../../Assets/Admin/to_classic.svg'
+import { users } from '../../../Data/fakeData'
+import {ReactComponent as Delete} from '../../../Assets/Admin/delete.svg'
+import {ReactComponent as Upgrade} from '../../../Assets/Admin/to_partner.svg'
+import {ReactComponent as Downgrade} from '../../../Assets/Admin/to_classic.svg'
 
 function UserList() {
 

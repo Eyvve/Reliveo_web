@@ -3,12 +3,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import {Routes, Link, Route, BrowserRouter} from 'react-router-dom'
 import AdminPage from './Components/AdminComponents/AdminPage';
-import UserManager from './Components/AdminComponents/UserManager';
-import ContentManager from './Components/AdminComponents/ContentManager';
-import EventManager from './Components/AdminComponents/EventManager';
-import StreamerManager from './Components/AdminComponents/StreamerManager';
-import UserList from './Components/AdminComponents/UserList';
-import CreateUser from './Components/AdminComponents/CreateUser';
+
+import UserManager from './Components/AdminComponents/UserManager/UserManager';
+import UserList from './Components/AdminComponents/UserManager/UserList';
+import CreateUser from './Components/AdminComponents/UserManager/CreateUser';
+
+
+import ContentList from './Components/AdminComponents/ContentManager/ContentList';
+import ContentManager from './Components/AdminComponents/ContentManager/ContentManager';
+
+
+import EventManager from './Components/AdminComponents/EventManager/EventManager';
+import EventList from './Components/AdminComponents/EventManager/EventList';
+import EventApplications from './Components/AdminComponents/EventManager/EventApplications';
+
+
+import StreamerManager from './Components/AdminComponents/StreamerManager/StreamerManager';
+import StreamerList from './Components/AdminComponents/StreamerManager/StreamerList';
+import StreamerApplications from './Components/AdminComponents/StreamerManager/StreamerApplications';
+
+
+import Login from './Components/Auth/Login';
+import useGetCookies from "./Hooks/useGetCookie";
+import useLogin from "./Hooks/useLogin";
+
+
 import ShowCase from './Components/ShowCaseComponents/ShowCase';
 import StreamingApplication from './Components/ShowCaseComponents/StreamingApplication';
 import ApplicationStep1 from './Components/ShowCaseComponents/ApplicationStep1'
@@ -17,19 +36,11 @@ import ApplicationStep3 from './Components/ShowCaseComponents/ApplicationStep3'
 import ApplicationStep4 from './Components/ShowCaseComponents/ApplicationStep4'
 import ApplicationStep5 from './Components/ShowCaseComponents/ApplicationStep5'
 import ApplicationStep6 from './Components/ShowCaseComponents/ApplicationStep6'
-import Login from './Components/Auth/Login';
-import useGetCookies from "./Hooks/useGetCookie";
-import useLogin from "./Hooks/useLogin";
 import StreamerTopBar from './Components/StreamerComponents/StreamerTopBar'
 import StreamerSideBar from './Components/StreamerComponents/StreamerSideBar'
 import AppIndex from './Components/Index/AppIndex';
 import MyEventManager from './Components/StreamerComponents/MyEventManager';
 import MyEventApplication from './Components/StreamerComponents/MyEventApplication';
-import ContentList from './Components/AdminComponents/ContentList';
-import StreamerList from './Components/AdminComponents/StreamerList';
-import StreamerApplications from './Components/AdminComponents/StreamerApplications';
-import EventList from './Components/AdminComponents/EventList';
-import EventApplications from './Components/AdminComponents/EventApplications';
 
 function App() {
   
@@ -69,7 +80,7 @@ function App() {
 }, [])
 
 useEffect(() => {
-    if (needsLogin && localUser.username !== '') {
+    if (needsLogin && localUser.email !== '') {
         console.log('login ?')
         login(localUser.email, localUser.password)
             .then(data => setLoggedUser(data))
