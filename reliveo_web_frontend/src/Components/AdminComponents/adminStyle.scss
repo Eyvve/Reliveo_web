@@ -126,12 +126,38 @@
             width: 80%;
             border-radius: 10px !important;
 
-            &_head {}
+            &_head {
+                display: grid;
+                grid-template-rows: 1fr;
+                gap: 0px 0px;     
+                border-radius: 10px;
+                align-items: center;
+                &>div{
+                    font-weight: 600;
+                }
+            }
 
             &_body {
                 position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
                 top: 37px;
-                margin: 0 300px;
+                margin: 0 auto;
+                width: 100%;
+
+                &_row{
+                    display: grid;
+                    height: 80px;
+                    border: 1px solid gray;
+                    grid-template-rows: 1fr;
+                    gap: 0px 0px;     
+                    padding: 10px;
+                    border-radius: 10px;
+                    grid-template-areas: ' 1 2 3 4 5 6 7 8 9 ';
+                    align-items: center;
+                    background-color: #F6F6F6 ;
+                }
 
                 &_info {}
 
@@ -304,4 +330,27 @@
     .pointing {
         cursor: pointer;
     }
+}
+
+
+
+                
+.StreamerList{
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr 2fr 1fr; 
+    grid-template-areas: ' 1 2 3 4 5 6 7 8 9 ';
+}
+
+
+.StreamerApplication{
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 2fr 1fr 1fr; 
+    grid-template-areas: ' 1 2 3 4 5 6 7 8 ';
+}
+
+.ContentList{
+    grid-template-columns: 1fr 1fr 1fr 3fr 3fr 2fr 1fr; 
+}
+
+.UserList{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr ; 
+    grid-template-areas: ' 1 2 3 4 5 6 7 ';
 }

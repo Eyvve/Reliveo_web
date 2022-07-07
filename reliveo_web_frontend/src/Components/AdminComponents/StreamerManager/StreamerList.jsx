@@ -12,43 +12,39 @@ function StreamerList() {
     }
 
   return (
-    <table className='Admin__Manager_List'>
-        <thead className='Admin__Manager_List_head'>
-            <tr>
-                <th>streamerId</th>
-                <th>streamerName</th>
-                <th>count</th>
-                <th>acceptanceStatus</th>
-                <th>status</th>
-                <th>type</th>
-                <th>musicalGenres</th>
-                <th>email</th>
-                {/* <th>website</th> */}
-                {/* <th>description</th> */}
-            </tr>
-        </thead>
-        <tbody className='Admin__Manager_List_body'>
+    <table className='Admin__Manager_List '>
+        <div className='Admin__Manager_List_head StreamerList'>
+                <div>Id</div>
+                <div>Nom</div>
+                <div>Posts</div>
+                <div>Statut</div>
+                <div>Statut live</div>
+                <div>Type</div>
+                <div>Genres</div>
+                <div>Email</div>
+        </div>
+        <section className='Admin__Manager_List_body'>
             {streamer.filter(value => value.acceptanceStatus == "accepted").map(value => {
                 return(
                     <>
-                        <tr key={value.streamerId}>
-                            <td>{value.streamerId}</td>
-                            <td>{value.streamerName}</td>
-                            <td>{value.totalcontentCount}</td>
-                            <td>{value.acceptanceStatus}</td>
-                            <td>{value.status}</td>
-                            <td>{value.type}</td>
-                            <td>{value.musicalGenres}</td>
-                            <td>{value.email}</td>
+                        <div key={value.streamerId} className='Admin__Manager_List_body_row StreamerList'>
+                            <div>{value.streamerId}</div>
+                            <div>{value.streamerName}</div>
+                            <div>{value.totalcontentCount}</div>
+                            <div>{value.acceptanceStatus}</div>
+                            <div>{value.status}</div>
+                            <div>{value.type}</div>
+                            <div>{value.musicalGenres}</div>
+                            <div>{value.email}</div>
                             {/* <td>{value.website}</td> */}
                             {/* <td>{value.description}</td> */}
-                            <td><Delete className="pointing" onClick={() => handleDeleteStreamer(value.streamerId)} /></td>
-                        </tr>
+                            <Delete className="pointing" onClick={() => handleDeleteStreamer(value.streamerId)} />
+                        </div>
                         
                     </>
                 )
             })}
-        </tbody>
+        </section>
     </table>
   )
 }

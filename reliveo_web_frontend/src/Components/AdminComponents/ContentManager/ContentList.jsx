@@ -10,29 +10,27 @@ function ContentList() {
 
   return (
     <table className='Admin__Manager_List'>
-                <thead className='Admin__Manager_List_head'>
-                    <tr>
-                        <th>contentId</th>
+                <div className='Admin__Manager_List_head ContentList'>
+                        <th>Id</th>
                         <th>AppId</th>
-                        <th>userName</th>
-                        <th>eventName</th>
-                        <th>streamerName</th>
-                        <th>postDate</th>
-                    </tr>
-                </thead>
+                        <th>Utilisateur</th>
+                        <th>Evènement</th>
+                        <th>Diffuseur</th>
+                        <th>Date</th>
+                </div>
                 <tbody className='Admin__Manager_List_body'>
                     {content.map(value => {
                         return(
                             <>
-                                <tr key={value.contentId}>
-                                    <td>{value.contentId}</td>
-                                    <td>{value.appId}</td>
-                                    <td>{value.userName}</td>
-                                    <td>{value.eventName}</td>
-                                    <td>{value.streamerName}</td>
-                                    <td>{value.postDate}</td>
-                                    <td><Delete className="pointing" onClick={() => handleDeleteContent(value.contentId)} /></td>
-                                </tr>
+                                <div  key={value.contentId} className='Admin__Manager_List_body_row ContentList'>
+                                    <div>{value.contentId}</div>
+                                    <div>{value.appId}</div>
+                                    <div>{value.userName}</div>
+                                    <div>{value.eventName}</div>
+                                    <div>{value.streamerName}</div>
+                                    <div>{value.postDate}</div>
+                                    <div><Delete className="pointing" onClick={() => handleDeleteContent(value.contentId)} /></div>
+                                </div>
                                 
                             </>
                         )

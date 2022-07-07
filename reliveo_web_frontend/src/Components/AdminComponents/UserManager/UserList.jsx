@@ -27,28 +27,26 @@ function UserList() {
 
     return (
         <table className='Admin__Manager_List'>
-            <thead className='Admin__Manager_List_head'>
-                <tr>
-                    <th>userId</th>
-                    <th>Nom d’utilisateur</th>
-                    <th>Statut</th>
-                    <th>Posts</th>
-                    <th>Evenements</th>
-                </tr>
-            </thead>
+            <div className='Admin__Manager_List_head UserList'>
+                    <div>userId</div>
+                    <div>Nom d’utilisateur</div>
+                    <div>Statut</div>
+                    <div>Posts</div>
+                    <div>Evenements</div>
+            </div>
             <tbody className='Admin__Manager_List_body'>
                 {users.map(value => {
                     return (
                         <>
-                            <tr key={value.userId}>
-                                <td>{value.userId}</td>
-                                <td>{value.userName}</td>
-                                <td>{value.status}</td>
-                                <td>{value.postCount}</td>
-                                <td>{value.eventCount}</td>
-                                <td>{value.status === "partenaire" ? <Downgrade className="pointing" onClick={() => handleChangeStatus(value.status)} /> : <Upgrade className="pointing" onClick={() => handleChangeStatus(value.status)} />}</td>
-                                <td><Delete className="pointing" onClick={() => handleDeleteUser(value.userId)} /></td>
-                            </tr>
+                            <div key={value.userId} className='Admin__Manager_List_body_row UserList'>
+                                <div>{value.userId}</div>
+                                <div>{value.userName}</div>
+                                <div>{value.status}</div>
+                                <div>{value.postCount}</div>
+                                <div>{value.eventCount}</div>
+                                <div>{value.status === "partenaire" ? <Downgrade className="pointing" onClick={() => handleChangeStatus(value.status)} /> : <Upgrade className="pointing" onClick={() => handleChangeStatus(value.status)} />}</div>
+                                <div><Delete className="pointing" onClick={() => handleDeleteUser(value.userId)} /></div>
+                            </div>
 
                         </>
                     )
