@@ -1,11 +1,12 @@
 import React from 'react'
 import { streamer } from '../../../Data/fakeData'
 import {ReactComponent as Check} from '../../../Assets/Admin/check.svg'
-
+import usePutStreamer from '../../../Hooks/Put/usePutStreamer'
 function StreamerApplications() {
-    
+    const putStreamer = usePutStreamer();
     const handleAcceptStreamer = (prop) => {
-        console.log("Diffuseur n°" + prop + " accepté")
+        console.log("Diffuseur n°" + prop + " accepté");
+        putStreamer();
     }
 
   return (

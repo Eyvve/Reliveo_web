@@ -10,6 +10,9 @@ function UserManagerNav() {
        <Link className='Admin__Manager_nav_button' to="/webapp/admin/userManager/createUser">
             <div>Créer un utilisateur</div>
        </Link>
+       <Link className='Admin__Manager_nav_button' to="/webapp/admin/userManager/createAdmin">
+            <div>Créer un administrateur</div>
+       </Link>
     </nav>
   )
 }

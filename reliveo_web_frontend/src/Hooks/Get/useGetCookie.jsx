@@ -1,3 +1,4 @@
+//get Cookie
 export default function useGetCookie() {
     let cookies = {};
 

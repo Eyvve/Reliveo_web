@@ -1,0 +1,74 @@
+.EventApplication {
+    &__left {
+        &_step {
+            margin: 37px auto;
+            width: 25%;
+            &_block {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: left;
+                &_title {
+                    text-align: center;
+                    &.step4 {
+                        text-align: start;
+                        width: 50%;
+                        color: #A65AFF;
+                        margin-top: 58px;
+                    }
+                }
+                &_message {
+                    text-align: start;
+                    padding-top:30px ;
+                    padding-left: 40px;
+                    padding-right: 40px;
+                }
+                &_label {
+                    margin-top: 16px;
+                }
+                &_input {
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    padding-left: 5px;
+                    &_date {
+                        width: 32%;
+                    }
+                }
+                &_buttons{
+                    display: flex;
+                    gap: 20px;
+                        align-items: center;
+                        justify-content: center;
+                        margin-top: 100px;
+                    &.step2 {
+                        margin-top: 155px;
+                    }
+                    &_button{
+                        width: 50%;
+                        height: 50px;
+                        border-radius: 25px;
+                        font-weight: 600;
+                        border: 2px solid;
+                    }
+    
+                    .previous{
+                        background-color: #FFF;
+                        border-color: black;
+                        &:hover{
+                        background-color: rgb(231, 231, 231);
+                        }
+                    }
+                    .next{
+                        background-color: #A65AFF;
+                        border-color: #A65AFF;
+                        color: #F2F2F2;
+                        &:hover{
+                        background-color: #8342ce;
+                        border-color: #8342ce;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

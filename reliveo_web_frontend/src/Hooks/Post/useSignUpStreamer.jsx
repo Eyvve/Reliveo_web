@@ -1,16 +1,18 @@
 import axios from "axios";
 
-export default function useLogin() {
+//Add new user with role 'admin'
+export default function useSignUpStreamer() {
     return (email, password) => {
-        return axios('http://13.80.23.145/authentication_token ', {
+        return axios('http://reliveoapi.com/api/streamer ', {
             method: "post",
             data: {
                 email: email,
-                password: password
+                password: password,
+                role: 'streamers'
 
             }
         })
-            .then(res => res.data)
+            .then(res => console.log(res.data))
             .catch (error => console.log(error.response));
         // console.log("username : " + username + ", password : " + password)
     }

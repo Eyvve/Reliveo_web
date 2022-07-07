@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as Cloud } from "../../../Assets/Admin/cloud.svg";
-import useSignUpUser from "../../../Hooks/Post/useSignUpUser";
-
-function CreateUser() {
-  const SignUp = useSignUpUser();
+import useSignUpAdmin from "../../../Hooks/Post/useSignUpAdmin";
+function CreateAdmin() {
+  const SignUp = useSignUpAdmin();
   useEffect(() => {
-    document.title = "Reliveo | Créer utilisateur";
+    document.title = "Reliveo | Créer administrateur";
   }, []);
-
+  
   const [files, setFiles] = useState([]);
 
   const navigate = useNavigate();
@@ -23,14 +21,15 @@ function CreateUser() {
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })
-        )
+          )
       );
     },
   });
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("createUser")
-    SignUp("t@tit.com", "dsfdfsf888", "username", "role")
+    console.log("createAdmin ");
+    SignUp("t@tit.com","dsfdfsf888")
 
   }
   return (
@@ -62,27 +61,11 @@ function CreateUser() {
           type="password"
         />
         <label className="Admin__left_step_block_label">
-        Type d’utilisateur
-        </label>
-        <select name="" id="" className="Admin__left_step_block_input">
-          <option value="Classique">Classique</option>
-          <option value="Partenaire">Partenaire</option>
-        </select>
-        {/* <label  className="Admin__left_step_block_label">
-          Type d'utilisateur
-        </label> */}
-        {/* <Select
-          className="EventApplication__left_step_block_input"
-          name="Email"
-        /> */}
-
-        <label className="Admin__left_step_block_label">
           Photo de Profil
         </label>
         <div {...getRootProps()} className="Admin__left_step_dragndrop">
           <input
             className="Admin__left_step_block_input"
-
             {...getInputProps()}
           />
           <p>
@@ -96,7 +79,7 @@ function CreateUser() {
             className="Admin__left_step_block_buttons_button next"
             type="submit"
           >
-            Créer l’utilisateur
+            Créer l’administrateur
           </button>
         </div>
       </div>
@@ -104,4 +87,4 @@ function CreateUser() {
   );
 }
 
-export default CreateUser;
+export default CreateAdmin;

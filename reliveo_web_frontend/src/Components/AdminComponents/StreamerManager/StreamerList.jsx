@@ -1,11 +1,14 @@
 import React from 'react'
 import {ReactComponent as Delete} from '../../../Assets/Admin/delete.svg'
 import { streamer } from '../../../Data/fakeData'
+import useDeleteUser from '../../../Hooks/Delete/useDeleteUser'
 
 function StreamerList() {
 
+    const DeleteUser = useDeleteUser();
     const handleDeleteStreamer = (prop) => {
-        console.log("diffuseur n°" + prop + " supprimé")
+        console.log("diffuseur n°" + prop + " supprimé");
+        DeleteUser();
     }
 
   return (
