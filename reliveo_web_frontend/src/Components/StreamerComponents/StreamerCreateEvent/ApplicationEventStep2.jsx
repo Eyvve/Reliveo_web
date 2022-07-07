@@ -3,7 +3,7 @@ import {useDropzone} from 'react-dropzone'
 import { useNavigate } from 'react-router-dom';
 
 function ApplicationEventStep2({setLocalApplicationForm, importedPPData}) {
-
+ //create event request  
   const [files, setFiles] = useState([]);
     
   const navigate = useNavigate()

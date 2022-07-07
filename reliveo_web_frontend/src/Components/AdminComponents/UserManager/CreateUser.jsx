@@ -27,9 +27,13 @@ function CreateUser() {
       );
     },
   });
+  const handleChange = (e) => {
+
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("createUser")
+    //post data for axios
     SignUp("t@tit.com", "dsfdfsf888", "username", "role")
 
   }
@@ -43,6 +47,7 @@ function CreateUser() {
           className="Admin__left_step_block_input"
           placeholder="Nom d'utilisateur"
           name="pseudo"
+          onChange={handleChange}
         />
         <label className="Admin__left_step_block_label">
           Adresse mail
@@ -51,6 +56,7 @@ function CreateUser() {
           className="Admin__left_step_block_input"
           placeholder="Adresse mail"
           name="email"
+          onChange={handleChange}
         />
         <label className="Admin__left_step_block_label">
           Mot de Passe
@@ -60,11 +66,12 @@ function CreateUser() {
           placeholder="Mot de passe"
           name="username"
           type="password"
+          onChange={handleChange}
         />
         <label className="Admin__left_step_block_label">
         Type d’utilisateur
         </label>
-        <select name="" id="" className="Admin__left_step_block_input">
+        <select name="" id="" className="Admin__left_step_block_input" onChange={handleChange}>
           <option value="Classique">Classique</option>
           <option value="Partenaire">Partenaire</option>
         </select>
@@ -84,6 +91,7 @@ function CreateUser() {
             className="Admin__left_step_block_input"
 
             {...getInputProps()}
+            onChange={handleChange}
           />
           <p>
             <strong>Déposez</strong> votre image ici, ou{" "}

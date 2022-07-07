@@ -11,8 +11,12 @@ import { useEffect, useState } from "react";
 import useDeleteEvent from "../../../Hooks/Delete/useDeleteEvent";
 import usePutEvent from "../../../Hooks/Put/usePutEvent";
 import useGetEventListPending from "../../../Hooks/Get/useGetEventListPending";
+import { getCurrentDate } from "../../../Hooks/getCurrentData";
 
 function EventListPending() {
+
+  //current data , utile pour le match avec la dateTimeStart de l'event pour afficher le Today en vert
+console.log(getCurrentDate())
   //display detail of an event
   const getEventListPending = useGetEventListPending();
   const [displayDetail, setDisplayDetail] = useState(false);

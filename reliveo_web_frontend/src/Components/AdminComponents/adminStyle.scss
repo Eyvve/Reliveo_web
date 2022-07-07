@@ -101,7 +101,17 @@
                 padding-right: 30px;
                 border-radius: 10px;
                 &.is_active {
-                    filter:  invert(60%) sepia(68%) saturate(2232%) hue-rotate(241deg) brightness(100%) contrast(102%)
+                    background-color: #A65AFF;
+                    &>div {
+                        color: #F6F6F6;
+                    }
+                    &_none {
+                        background-color:#F6F6F6;
+                        &>div {
+                            color: #414141;
+                            ;
+                        }
+                    }
                 }
                 &>div {
                     color: #414141;

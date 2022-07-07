@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { eventType } from "../../../Data/data";
 
+//create event request  
 function ApplicationEventStep1({ setLocalApplicationForm, importedData }) {
   const navigate = useNavigate();
 

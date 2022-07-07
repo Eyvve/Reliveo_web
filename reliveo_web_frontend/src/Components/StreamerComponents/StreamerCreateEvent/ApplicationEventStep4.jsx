@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ApplicationEventStep4({ localApplicationForm }) {
+  //create event request
   const navigate = useNavigate();
   // const apply = useSubmitStreamerApplication()
 

@@ -31,7 +31,7 @@ function AdminSideBar() {
           <p>Accueil</p>
         </Link>
         <Link to="/webapp/admin/userManager/userList" onClick={handleClick}>
-          <Users className={'Admin__sidebar_container_link ' + (currentUrl === "/webapp/admin/userManager/userList" ? ' is_active' : '')} />
+          <Users className={'Admin__sidebar_container_link ' + (currentUrl !== "/webapp/admin/userManager/userList" ? ' is_active_none' : 'is_active')} />
           <p className={'Admin__sidebar_container_title'+ (currentUrl === "/webapp/admin/userManager/userList" ? ' is_active' : '')} >Utilisateurs</p>
         </Link>
         {/* <Link to="/webapp/admin/userManager/userList" onClick={handleClick}>
