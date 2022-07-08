@@ -82,6 +82,11 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+
+                &>div>div{
+                    text-align: center;
+                    margin: 10px;
+                }
                 
                 &>div>div>img{
                     background-color: black;

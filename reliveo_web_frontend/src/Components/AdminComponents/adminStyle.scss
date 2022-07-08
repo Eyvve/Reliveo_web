@@ -87,7 +87,7 @@
         width: 90%;
 
         &_nav {
-            padding-bottom: 40px;
+            padding-bottom: 0px;
             display: flex;
             gap: 35px;
             justify-content: center;
@@ -303,7 +303,7 @@
                     gap: 20px;
                     align-items: center;
                     justify-content: center;
-                    margin-top: 100px;
+                    margin-top: 10px;
 
                     &.step2 {
                         margin-top: 155px;

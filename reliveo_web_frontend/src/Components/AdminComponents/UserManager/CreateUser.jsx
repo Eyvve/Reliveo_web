@@ -1,18 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as Cloud } from "../../../Assets/Admin/cloud.svg";
 import useSignUpUser from "../../../Hooks/Post/useSignUpUser";
 
 function CreateUser() {
   const SignUp = useSignUpUser();
+  const navigate = useNavigate();
+
+  const [files, setFiles] = useState([]);
+  const [localInput, setLocalInput] = useState({
+    username: "",
+    email: "",
+    password: "",
+    type: "",
+    picture: "",
+  });
+
+  
   useEffect(() => {
     document.title = "Reliveo | Créer utilisateur";
   }, []);
+  
+  useEffect(() => {
+    console.log(localInput)
+  }, [localInput]);
 
-  const [files, setFiles] = useState([]);
+  useEffect(() => {
+    console.log(files)
+  }, [files]);
 
-  const navigate = useNavigate();
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
@@ -27,13 +44,39 @@ function CreateUser() {
       );
     },
   });
-  const handleChange = (e) => {
 
-  }
+  const thumbs = files.map(file => (
+    <div key={file.name}>
+      <div >
+        <img
+          src={file.preview}
+          // onLoad={() => { URL.revokeObjectURL(file.preview) }}
+          onError={(event) => event.target.style.display = 'none'}
+        />
+      </div>
+    </div>
+  ));
+
+  
+  const handleChange = ({target}) => {
+    setLocalInput(prev => ({
+        ...prev,
+        [target.name]: target.value
+    }))
+}
+
+  useEffect(() => {
+    setLocalInput(prev => ({
+      ...prev,
+      picture: files[0]
+    }))
+  }, [files]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("createUser")
     //post data for axios
+    SignUp()
 
   }
   return (
@@ -45,7 +88,7 @@ function CreateUser() {
         <input
           className="Admin__left_step_block_input"
           placeholder="Nom d'utilisateur"
-          name="pseudo"
+          name="username"
           onChange={handleChange}
         />
         <label className="Admin__left_step_block_label">
@@ -63,14 +106,14 @@ function CreateUser() {
         <input
           className="Admin__left_step_block_input"
           placeholder="Mot de passe"
-          name="username"
+          name="password"
           type="password"
           onChange={handleChange}
         />
         <label className="Admin__left_step_block_label">
         Type d’utilisateur
         </label>
-        <select name="" id="" className="Admin__left_step_block_input" onChange={handleChange}>
+        <select name="type" className="Admin__left_step_block_input" onChange={handleChange}>
           <option value="Classique">Classique</option>
           <option value="Partenaire">Partenaire</option>
         </select>
@@ -85,19 +128,21 @@ function CreateUser() {
         <label className="Admin__left_step_block_label">
           Photo de Profil
         </label>
+        <div className='Application__left_step_previewContainer' >
+        {thumbs}
+        </div>
         <div {...getRootProps()} className="Admin__left_step_dragndrop">
           <input
             className="Admin__left_step_block_input"
 
             {...getInputProps()}
-            onChange={handleChange}
+            // onChange={handleChangePicture}
           />
           <p>
             <strong>Déposez</strong> votre image ici, ou{" "}
             <strong>cliquez</strong> pour importer via l'explorateur
           </p>
         </div>
-        <br></br>
         <div className="Admin__left_step_block_buttons ">
           <button
             className="Admin__left_step_block_buttons_button next"

@@ -10,8 +10,23 @@ function CreateAdmin() {
   }, []);
   
   const [files, setFiles] = useState([]);
+  const [localInput, setLocalInput] = useState({
+    username: "",
+    email: "",
+    password: "",
+    picture: "",
+  });
 
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    console.log(localInput)
+  }, [localInput]);
+
+  useEffect(() => {
+    console.log(files)
+  }, [files]);
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
@@ -22,13 +37,37 @@ function CreateAdmin() {
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })
-          )
+        )
       );
     },
   });
-  const handleChange = (e) => {
 
-  }
+  const thumbs = files.map(file => (
+    <div key={file.name}>
+      <div >
+        <img
+          src={file.preview}
+          // onLoad={() => { URL.revokeObjectURL(file.preview) }}
+          onError={(event) => event.target.style.display = 'none'}
+        />
+      </div>
+    </div>
+  ));
+
+  const handleChange = ({target}) => {
+    setLocalInput(prev => ({
+        ...prev,
+        [target.name]: target.value
+    }))
+ }
+ 
+  useEffect(() => {
+    setLocalInput(prev => ({
+      ...prev,
+      picture: files[0]
+    }))
+  }, [files]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("createAdmin ");
@@ -68,11 +107,14 @@ function CreateAdmin() {
         <label className="Admin__left_step_block_label">
           Photo de Profil
         </label>
+        <div className='Application__left_step_previewContainer' >
+        {thumbs}
+        </div>
         <div {...getRootProps()} className="Admin__left_step_dragndrop">
           <input
             className="Admin__left_step_block_input"
             {...getInputProps()}
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <p>
             <strong>Déposez</strong> votre image ici, ou{" "}
