@@ -12,7 +12,7 @@ function StreamerList() {
     }
 
   return (
-    <table className='Admin__Manager_List '>
+    <div className='Admin__Manager_List '>
         <div className='Admin__Manager_List_head StreamerList'>
                 <div>Id</div>
                 <div>Nom</div>
@@ -45,7 +45,7 @@ function StreamerList() {
                 )
             })}
         </section>
-    </table>
+    </div>
   )
 }
 

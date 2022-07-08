@@ -10,7 +10,7 @@ function StreamerApplications() {
     }
 
   return (
-    <table className='Admin__Manager_List'>
+    <div className='Admin__Manager_List'>
         <div className='Admin__Manager_List_head StreamerApplication'>
                 <div>Id</div>
                 <div>StreamerName</div>
@@ -39,7 +39,7 @@ function StreamerApplications() {
                 )
             })}
         </section>
-    </table>
+    </div>
   )
 }
 

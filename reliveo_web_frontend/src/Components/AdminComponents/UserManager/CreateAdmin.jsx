@@ -32,7 +32,6 @@ function CreateAdmin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("createAdmin ");
-    SignUp("t@tit.com","dsfdfsf888")
 
   }
   return (

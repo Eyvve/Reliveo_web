@@ -104,7 +104,7 @@ function ApplicationStep4({setLocalApplicationForm, importedProofData, importedD
         </button>
         <button className='Application__left_step_buttons_button next' 
         onClick={handleNext}>
-          Valider
+          Suivant
         </button>
       </div>
     </div>

@@ -11,7 +11,8 @@ export default function useLogin() {
 
             }
         })
-            .then(res => console.log(res.data))
+            .then(res => res.data)
+            .then(data => document.cookie = "ReliveoJwt" + "= " + data.token + "; expires =" + (new Date()).setTime((new Date()).getTime() + 500) + "; path=/")
             .catch (error => console.log(error.response));
         // console.log("username : " + username + ", password : " + password)
     }

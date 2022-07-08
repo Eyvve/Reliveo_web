@@ -27,7 +27,7 @@ function EventList() {
             .map((value) => {
               return (
                 <>
-                  <div className="Admin__Manager_List_body_event">
+                  <div key={value} className="Admin__Manager_List_body_event">
                     <div className="Admin__Manager_List_body_event_logoName">
                       <img
                         src="../../reliveo_web_frontend/public/logo192.png"

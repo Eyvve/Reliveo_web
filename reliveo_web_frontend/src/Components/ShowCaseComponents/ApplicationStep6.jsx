@@ -1,42 +1,80 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import useSubmitStreamerApplication from '../../Hooks/useSubmitStreamerApplication';
 
-function ApplicationStep6({localApplicationForm}) {
+function ApplicationStep6({localApplicationForm, eventType, streamerName, genreList, profilePicture, officialWebsite, description, identityProof, importedEmailData}) {
 
   const navigate = useNavigate()
-  // const apply = useSubmitStreamerApplication()
 
   const handlePrevious = (e => {
-    return navigate('/streamingApplication/step4')
+    return navigate('/streamingApplication/step5')
   })
 
-  const handleSubmit = (e => {
-    // apply(localApplicationForm)
-    //   .then(data => {
-    //   console.log(data)
-    return navigate('/')
+  const handleNext = (e => {
+    return navigate('/streamingApplication/step7')
+  })
+
+  const handleApply = (e => {
+    
   })
 
   useEffect(() => {
-    console.log(localApplicationForm)
+    console.log(identityProof)
   }, []);
 
   return (
     <section className='Application__left_step'>
-      <h1 className='Application__left_step_title'>Merci pour votre candidature</h1>
+      <h1 className='Application__left_step_title'>Résumé</h1>
       <hr className='Application__left_step_hr'></hr>
       <br />
-      <div className='Application__left_step_message'>
-        <h4>Notre équipe se chargera de valider votre candidature dans les plus brefs delais.</h4>
-        <h4>Vous recevrez un email contenant vos identifiants si votre application est retenue.</h4>
-        <h4>Nous vous joindrons dans les plus brefs délais. </h4>
+
+      <div className='Application__left_step_table'>
+        <div>
+            <tr>
+                <td>Type d'évènement</td>
+                <td>{eventType}</td>
+            </tr>
+            <tr>
+                <td>Nom de diffuseur</td>
+                <td>{streamerName}</td>
+            </tr>
+            <tr>
+                <td>Genres musicaux</td>
+                <td>{genreList.map((genre, index) => {
+                   return <p key={index}>{genre.value}</p>
+                })}</td>
+            </tr>
+            <tr>
+                <td>Image de profil</td>
+                <td>{profilePicture[0]?.path}</td>
+            </tr>
+            <tr>
+                <td>Lien vers le site</td>
+                <td>{officialWebsite}</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>{description}</td>
+            </tr>
+            <tr>
+                <td>Preuve d'identité</td>
+                <td>{identityProof[0]?.path}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{importedEmailData}</td>
+            </tr>
+        </div>
       </div>
-      <br /><br />
+      <br />
+
       <div className='Application__left_step_buttons'>
+        <button className='Application__left_step_buttons_button previous' 
+        onClick={handlePrevious}>
+          Précédent
+        </button>
         <button className='Application__left_step_buttons_button next' 
-        onClick={handleSubmit}>
-          Page d'accueil
+        onClick={handleApply}>
+          Valider
         </button>
       </div>
     </section>

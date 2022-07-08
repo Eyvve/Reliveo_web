@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import LoginForm from './LoginForm'
 import {ReactComponent as ReliveoLogo} from '../../Assets/ShowCase/reliveo_application_logo.svg'
 
-function Login({localUser, setLocalUser, needsLogin, setNeedsLogin, loggedUser}) {
+function Login({localUser, setLocalUser, needsLogin, setNeedsLogin,setLoggedUser, loggedUser}) {
   return (
     <div className='Application'>
         <section className='Application__left'>

@@ -1,19 +1,18 @@
 import React, {useState} from 'react'
 import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
+import useLogin from '../../Hooks/Post/useLogin';
 
-function LoginForm({localUser, setLocalUser, needsLogin, setNeedsLogin, loggedUser}) {
+function LoginForm({localUser, setLocalUser, needsLogin, setNeedsLogin, setLoggedUser, loggedUser}) {
 
     const navigate = useNavigate()
+
+    const login = useLogin();
 
     const [formInput, setFormInput] = useState({
         email: "",
         password: '',
     });
-
-    useEffect(() => {
-        console.log(formInput)
-    }, [formInput]);
     
     const handleChange = ({target}) => {
         setFormInput(prev => ({
@@ -25,15 +24,6 @@ function LoginForm({localUser, setLocalUser, needsLogin, setNeedsLogin, loggedUs
     const handleSubmit = (e) => {
         e.preventDefault();
         setLocalUser(formInput);
-        console.log("localuser " + localUser.email)
-        // if (loggedUser.status === "admin"){
-        //     navigate("/webapp/admin/userManager")
-        // }else if (loggedUser.status === "streamer"){
-        //     navigate("/webapp/streamer/eventManager")
-        // }else{
-        //     navigate("/")
-        // }
-
     }
 
   return (

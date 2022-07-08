@@ -22,7 +22,9 @@ function ShowCase({setLocalApplicationForm}) {
       profilePicture: [],
       officialWebsite: "",
       description: "",
-      identityProof: ""
+      identityProof: "",
+      email: "",
+      password: ""
     })
   }, []);
 

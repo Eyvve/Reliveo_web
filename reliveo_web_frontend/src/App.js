@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
-import { Routes, Link, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Link, Route, BrowserRouter, useNavigate } from "react-router-dom";
 import AdminPage from "./Components/AdminComponents/AdminPage";
 
 import UserManager from "./Components/AdminComponents/UserManager/UserManager";
@@ -31,6 +31,8 @@ import ApplicationStep3 from "./Components/ShowCaseComponents/ApplicationStep3";
 import ApplicationStep4 from "./Components/ShowCaseComponents/ApplicationStep4";
 import ApplicationStep5 from "./Components/ShowCaseComponents/ApplicationStep5";
 import ApplicationStep6 from "./Components/ShowCaseComponents/ApplicationStep6";
+import ApplicationStep7 from "./Components/ShowCaseComponents/ApplicationStep7";
+
 import StreamerTopBar from "./Components/StreamerComponents/StreamerTopBar";
 import StreamerSideBar from "./Components/StreamerComponents/StreamerSideBar";
 import AppIndex from "./Components/Index/AppIndex";
@@ -69,7 +71,7 @@ function App() {
   //state bool login
   const [needsLogin, setNeedsLogin] = useState(true);
 
-  //become an streamer data for form
+  //become a streamer data for form
   const [localApplicationForm, setLocalApplicationForm] = useState({
     eventType: "",
     streamerName: "",
@@ -78,6 +80,8 @@ function App() {
     officialWebsite: "",
     description: "",
     identityProof: "",
+    email: "",
+    password: "",
   });
 
   //become create stream data for form
@@ -93,13 +97,17 @@ function App() {
 
   //handle ReliveoJwt
   useEffect(() => {
-    if (Object.keys(cookies).includes("ReliveoJWT")) {
+    if (Object.keys(cookies).includes("ReliveoJwt")) {
       console.log("got cookies !", loggedUser);
       setLoggedUser((prev) => ({
         ...prev,
-        username: cookies.hetic_username,
-        token: cookies.hetic_token,
-        status: cookies.hetic_status,
+        // username: cookies.hetic_username,
+        // token: cookies.hetic_token,
+        // status: cookies.hetic_status,
+        username: "gigachad",
+        token: "gigatoken",
+        userStatus: "ROLE_ADMINISTRATEUR",
+        status: "OK",
       }));
     }
   }, []);
@@ -111,13 +119,12 @@ function App() {
       login(localUser.email, localUser.password).then((data) =>
         setLoggedUser(data)
       );
-      // .then(data => console.log(data))
     }
   }, [localUser]);
 
   useEffect(() => {
-    console.log(loggedUser);
-  }, [loggedUser]);
+    console.log(localApplicationForm);
+  }, [localApplicationForm]);
 
   return (
     <div className="App">
@@ -178,9 +185,17 @@ function App() {
                 }
               />
               <Route
-                path="/streamingApplication/step5"
+              path="/streamingApplication/step5"
+              element={
+                <ApplicationStep5
+                  setLocalApplicationForm={setLocalApplicationForm}
+                />
+              }
+            />
+              <Route
+                path="/streamingApplication/step6"
                 element={
-                  <ApplicationStep5
+                  <ApplicationStep6
                     eventType={localApplicationForm.eventType.label}
                     streamerName={localApplicationForm.streamerName}
                     genreList={localApplicationForm.genreList}
@@ -189,13 +204,14 @@ function App() {
                     description={localApplicationForm.description}
                     identityProof={localApplicationForm.identityProof}
                     importedData={localApplicationForm}
+                    importedEmailData={localApplicationForm.email}
                   />
                 }
               />
               <Route
-                path="/streamingApplication/step6"
+                path="/streamingApplication/step7"
                 element={
-                  <ApplicationStep6 importedData={localApplicationForm} />
+                  <ApplicationStep7 importedData={localApplicationForm} />
                 }
               />
             </Route>
@@ -206,6 +222,7 @@ function App() {
                 <Login
                   localUser={localUser}
                   loggedUser={loggedUser}
+                  setLoggedUser={setLoggedUser}
                   setLocalUser={setLocalUser}
                   needsLogin={needsLogin}
                   setNeedsLogin={setNeedsLogin}

@@ -26,7 +26,7 @@ function UserList() {
     }
 
     return (
-        <table className='Admin__Manager_List'>
+        <div className='Admin__Manager_List'>
             <div className='Admin__Manager_List_head UserList'>
                     <div>userId</div>
                     <div>Nom d’utilisateur</div>
@@ -34,7 +34,7 @@ function UserList() {
                     <div>Posts</div>
                     <div>Evenements</div>
             </div>
-            <tbody className='Admin__Manager_List_body'>
+            <div className='Admin__Manager_List_body'>
                 {users.map(value => {
                     return (
                         <>
@@ -51,8 +51,8 @@ function UserList() {
                         </>
                     )
                 })}
-            </tbody>
-        </table>
+            </div>
+        </div>
 
     )
 }

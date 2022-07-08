@@ -34,7 +34,6 @@ function CreateUser() {
     e.preventDefault();
     console.log("createUser")
     //post data for axios
-    SignUp("t@tit.com", "dsfdfsf888", "username", "role")
 
   }
   return (

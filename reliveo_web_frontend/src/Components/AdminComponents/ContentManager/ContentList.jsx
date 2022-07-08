@@ -9,7 +9,7 @@ function ContentList() {
     }
 
   return (
-    <table className='Admin__Manager_List'>
+    <div className='Admin__Manager_List'>
                 <div className='Admin__Manager_List_head ContentList'>
                         <th>Id</th>
                         <th>AppId</th>
@@ -18,7 +18,7 @@ function ContentList() {
                         <th>Diffuseur</th>
                         <th>Date</th>
                 </div>
-                <tbody className='Admin__Manager_List_body'>
+                <div className='Admin__Manager_List_body'>
                     {content.map(value => {
                         return(
                             <>
@@ -35,8 +35,8 @@ function ContentList() {
                             </>
                         )
                     })}
-                </tbody>
-            </table>
+                </div>
+            </div>
   )
 }
 
