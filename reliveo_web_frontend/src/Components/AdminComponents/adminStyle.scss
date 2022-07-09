@@ -234,6 +234,7 @@
     }
 
     &__left {
+        overflow: hidden;
         &_step {
             margin: 37px auto;
             width: 25%;

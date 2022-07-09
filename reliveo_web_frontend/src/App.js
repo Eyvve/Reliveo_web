@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 import { Routes, Link, Route, BrowserRouter, useNavigate } from "react-router-dom";
 import AdminPage from "./Components/AdminComponents/AdminPage";
+import Webapp from "./Components/Webapp";
 
 import UserManager from "./Components/AdminComponents/UserManager/UserManager";
 import UserList from "./Components/AdminComponents/UserManager/UserList";
@@ -230,6 +231,7 @@ function App() {
               }
             ></Route>
             {/* URL - Streamer  */}
+            <Route path="/webapp" element={<Webapp userStatus={loggedUser.userStatus} />}>
             <Route path="/webapp/streamer/" element={<StreamerPage />}>
               <Route
                 path="/webapp/streamer/eventApplication/step1"
@@ -344,6 +346,7 @@ function App() {
                   path="/webapp/streamer/eventManager/createEvent"
                   element={<CreateUser />}
                 />
+                </Route>
               </Route>
             </Route>
           </Route>

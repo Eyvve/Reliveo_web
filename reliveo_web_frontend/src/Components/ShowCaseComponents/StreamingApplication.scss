@@ -4,6 +4,7 @@
     &__left{
         width: 50%;
         overflow-y:scroll;
+        overflow: hidden;
         &_top{
             height: 75px;
             width: 49%;
