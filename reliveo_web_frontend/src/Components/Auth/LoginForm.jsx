@@ -24,6 +24,7 @@ function LoginForm({localUser, setLocalUser, needsLogin, setNeedsLogin, setLogge
     const handleSubmit = (e) => {
         e.preventDefault();
         setLocalUser(formInput);
+        navigate("/webapp")
     }
 
   return (

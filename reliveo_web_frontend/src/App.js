@@ -1,9 +1,14 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react'
 import { useState, useEffect } from "react";
-import { Routes, Link, Route, BrowserRouter, useNavigate } from "react-router-dom";
+import { Routes, Link, Route, BrowserRouter } from "react-router-dom";
+import { LogContext } from "./Context/Contexts";
+import * as jose from 'jose';
+
 import AdminPage from "./Components/AdminComponents/AdminPage";
 import Webapp from "./Components/Webapp";
+import NoAccess from "./Components/ErrorPages/NoAccess";
 
 import UserManager from "./Components/AdminComponents/UserManager/UserManager";
 import UserList from "./Components/AdminComponents/UserManager/UserList";
@@ -57,6 +62,8 @@ function App() {
   const login = useLogin();
   //get Coockies
   const cookies = useGetCookies();
+  
+  const {ReliveoJwt} = useGetCookies()
 
   //state local for logged  
   const [loggedUser, setLoggedUser] = useState({
@@ -65,6 +72,8 @@ function App() {
     username: "",
     userStatus: "",
   });
+
+  
 
   //state info user in local
   const [localUser, setLocalUser] = useState({ password: "", email: "" });
@@ -97,29 +106,43 @@ function App() {
   });
 
   //handle ReliveoJwt
-  useEffect(() => {
-    if (Object.keys(cookies).includes("ReliveoJwt")) {
-      console.log("got cookies !", loggedUser);
-      setLoggedUser((prev) => ({
-        ...prev,
-        // username: cookies.hetic_username,
-        // token: cookies.hetic_token,
-        // status: cookies.hetic_status,
-        username: "gigachad",
-        token: "gigatoken",
-        userStatus: "ROLE_ADMINISTRATEUR",
-        status: "OK",
-      }));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (Object.keys(cookies).includes("ReliveoJwt")) {
+  //     console.log("got cookies !", loggedUser);
+  //     setLoggedUser((prev) => ({
+  //       ...prev,
+  //       // username: cookies.hetic_username,
+  //       token: cookies.ReliveoJwt,
+  //       // status: cookies.hetic_status,
+  //       username: "gigachad",
+  //       // token: "gigatoken",
+  //       userStatus: "ROLE_ADMINISTRATEUR",
+  //       status: "OK",
+  //     }));
+  //   }
+  // }, []);
+
+
+  // useEffect(() => {
+  //     setLoggedUser(jose.decodeJwt(jwt))
+  // }, []);
 
   //user not logged
   useEffect(() => {
     if (needsLogin && localUser.email !== "") {
       console.log("login ?");
-      login(localUser.email, localUser.password).then((data) =>
-        setLoggedUser(data)
-      );
+      login(localUser.email, localUser.password)
+      // .then((data) =>
+      //   setLoggedUser((prev => ({
+      //     ...prev,
+      //     token: data,
+      //     username: "gigaChad",
+      //     userStatus: "ROLE_DIFFUSEUR",
+      //     status: "OK"
+      // })))
+      // );
+      setLoggedUser(jose.decodeJwt(ReliveoJwt))
+      
     }
   }, [localUser]);
 
@@ -129,6 +152,7 @@ function App() {
 
   return (
     <div className="App">
+      <LogContext.Provider value={[loggedUser, setLoggedUser]}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AppIndex />}>
@@ -231,7 +255,8 @@ function App() {
               }
             ></Route>
             {/* URL - Streamer  */}
-            <Route path="/webapp" element={<Webapp userStatus={loggedUser.userStatus} />}>
+            <Route path="/noAccess" element={<NoAccess setLoggedUser={setLoggedUser} />}/>
+            <Route path="/webapp" element={<Webapp loggedUser={loggedUser} />}>
             <Route path="/webapp/streamer/" element={<StreamerPage />}>
               <Route
                 path="/webapp/streamer/eventApplication/step1"
@@ -352,6 +377,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </LogContext.Provider>
     </div>
   );
 }
