@@ -62,15 +62,15 @@ function App() {
   const login = useLogin();
   //get Coockies
   const cookies = useGetCookies();
-  
-  const {ReliveoJwt} = useGetCookies()
 
   //state local for logged  
   const [loggedUser, setLoggedUser] = useState({
     status: "error",
-    token: "",
+    userid: "",
     username: "",
-    userStatus: "",
+    email: "",
+    photo: "",
+    roles: []
   });
 
   
@@ -132,23 +132,20 @@ function App() {
     if (needsLogin && localUser.email !== "") {
       console.log("login ?");
       login(localUser.email, localUser.password)
-      // .then((data) =>
-      //   setLoggedUser((prev => ({
-      //     ...prev,
-      //     token: data,
-      //     username: "gigaChad",
-      //     userStatus: "ROLE_DIFFUSEUR",
-      //     status: "OK"
-      // })))
-      // );
-      setLoggedUser(jose.decodeJwt(ReliveoJwt))
-      
+        .then(data => {
+          let jwtData = jose.decodeJwt(data.token)
+          document.cookie = "ReliveoJwt" + "= " + data.token + "; expires =" + (new Date()).setDate((new Date()).getDate() + 1) + "; path=/"
+          setLoggedUser({
+              status: "OK",
+              userid: jwtData.userid,
+              username: jwtData.username,
+              email: jwtData.email,
+              photo: jwtData.photo,
+              roles: jwtData.roles
+            })
+        })
     }
   }, [localUser]);
-
-  useEffect(() => {
-    console.log(localApplicationForm);
-  }, [localApplicationForm]);
 
   return (
     <div className="App">

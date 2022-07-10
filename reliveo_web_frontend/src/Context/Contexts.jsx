@@ -2,7 +2,9 @@ import React from "react"
 
 export const LogContext = React.createContext({
     status: "error",
-    token: "",
+    userid: "",
     username: "",
-    userStatus: "",
+    email: "",
+    photo: "",
+    roles: []
   })
