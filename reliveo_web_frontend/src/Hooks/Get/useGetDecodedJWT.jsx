@@ -5,7 +5,7 @@ export default function useGetUsers() {
     return () => {
         const cookie = document.cookie
         let jwtData = jose.decodeJwt(cookie)
-        console.log(jwtData)
+        // console.log(jwtData)
         return jwtData
     }
 }

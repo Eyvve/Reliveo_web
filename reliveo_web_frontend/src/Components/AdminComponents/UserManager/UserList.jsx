@@ -53,7 +53,7 @@ function UserList() {
                                 <div>{value.email}</div>
                                 <div>{value.roles[0]}</div>
                                 {/* <div>partenaire</div> */}
-                                <div>{value.posts.count}</div>
+                                <div>{value.posts.length}</div>
                                 {/* <div>{value.eventCount}</div> */}
                                 {/* <div>{value.status === "partenaire" ? <Downgrade className="pointing" onClick={() => handleChangeStatus(value.status)} /> : <Upgrade className="pointing" onClick={() => handleChangeStatus(value.status)} />}</div> */}
                                 <div><Delete className="pointing" onClick={() => handleDeleteUser(value.userId, value.id)} /></div>

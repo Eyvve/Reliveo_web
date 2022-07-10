@@ -6,68 +6,75 @@ import { ReactComponent as Image } from "../../../Assets/Admin/Rectangle.svg";
 import useGetEventList from '../../../Hooks/Get/useGetEventList'
 import { ReactComponent as TodayEvent } from "../../../Assets/Admin/todayEvent.svg";
 import { useEffect, useState } from 'react';
+import Moment from "moment"
+
 function EventList() {
     //display detail of an event
     const getEventList = useGetEventList();
+
+    const [events, setEvents] = useState([]);
+
     const [displayDetail, setDisplayDetail] = useState(false);
-    const handleViewDetail = () => {
-      setDisplayDetail(true);
-      console.log(displayDetail);
+    const handleViewDetail = (id) => {
+      setDisplayDetail(id);
+      console.log(id);
     };
     const  handleCloseViewDetail = () => {
       setDisplayDetail(false);
       console.log(displayDetail);
     }
+
+    useEffect(() => {
+      getEventList()
+          .then(data => setEvents(data))
+  }, [events]);
   
     return (
       <div className="Admin__Manager_List">
         <div className="Admin__Manager_List_body">
-          {streamer
-            .filter((value) => value.acceptanceStatus == "accepted")
-            .map((value) => {
+          {events.map((value) => {
               return (
                 <>
-                  <div key={value} className="Admin__Manager_List_body_event">
+                  <div key={value.id} className="Admin__Manager_List_body_event">
                     <div className="Admin__Manager_List_body_event_logoName">
                       <img
-                        src="../../reliveo_web_frontend/public/logo192.png"
+                        src={value.photo}
                         alt="image"
                         className="Admin__Manager_List_body_event_image"
                       />
-                      <p>{"event name"}</p>
+                      <p>{value.name}</p>
                     </div>
                     <div>
 
-                    <p  className="Admin__Manager_List_body_event_info">{"dateTime event"} <TodayEvent /></p>
+                    <p  className="Admin__Manager_List_body_event_info">{Moment(value.dateStart).format('DD MM yyyy')} <TodayEvent /></p>
                     </div>
                     <Detail
                       className="pointing"
                       style={
-                          displayDetail ? { display: "none" } : { display: "block" }
+                          displayDetail == value.id ? { display: "none" } : { display: "block" }
                         }
-                      onClick={() => handleViewDetail()}
+                      onClick={() => handleViewDetail(value.id)}
                     />
                     <CloseDetail
                       className="pointing"
                       style={
-                          displayDetail ? { display: "block" } : { display: "none" }
+                        displayDetail == value.id ? { display: "block" } : { display: "none" }
                         }
-                      onClick={() => handleCloseViewDetail()}
+                      onClick={() => handleCloseViewDetail(value.id)}
                     />
                   </div>
                   <div
                     className="Admin__Manager_List_body_detail"
                     style={
-                      displayDetail ? { display: "block" } : { display: "none" }
+                      displayDetail == value.id ? { display: "block" } : { display: "none" }
                     }
                   >
                     <div className="Admin__Manager_List_body_detail_info">
-                      <p>Heure de début : 21h</p>
-                      <p>Adresse : 32 rue Gigaweb, Wiesen</p>
-                      <p>Billeterie : Igorrr.fr</p>
+                      <p>Heure de début : {Moment(value.dateStart).format('DD MMMM YYYY, h:mm:ss a')}</p>
+                      <p>Adresse : {value.rue} {value.ville} </p>
                     </div>
                     <div className="Admin__Manager_List_body_detail_image">
-                      <Image />
+                      <img src={value.banner} />
                     </div>
                   </div>
                 </>

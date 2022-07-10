@@ -1,15 +1,27 @@
-import React from "react";
-import { streamer } from "../../Data/fakeData";
+import React, {useEffect, useState} from 'react'
+import { useContext } from 'react';
 import { ReactComponent as Detail } from "../../Assets/Streamer/detail.svg";
 import { ReactComponent as CloseDetail } from "../../Assets/Streamer/close.svg";
 import { ReactComponent as Image } from "../../Assets/Streamer/Rectangle.svg";
 import { ReactComponent as TodayEvent } from "../../Assets/Streamer/todayEvent.svg";
 import useGetEventOfOneStreamer from "../../Hooks/Get/useGetEventOfOneStreamer";
-import { useState } from "react";
+import useGetEventList from '../../Hooks/Get/useGetEventList'
+import { LogContext } from "../../Context/Contexts";
 
 function MyEventList() {
   //display detail of an event
   const [displayDetail, setDisplayDetail] = useState(false);
+  const [events, setEvents] = useState([]);
+
+  const [loggedUser, setLoggedUser] = useContext(LogContext);
+
+  const getEventList = useGetEventList();
+  
+  useEffect(() => {
+    getEventList()
+        .then(data => setEvents(data))
+  }, [events]);
+
   const myEvents = useGetEventOfOneStreamer();
   const handleViewDetail = () => {
     setDisplayDetail(true);
@@ -28,8 +40,8 @@ function MyEventList() {
     <div className="Streamer__Manager_List">
       <h4 className="Streamer__Manager_List_title">Mes événements</h4>
       <div className="Streamer__Manager_List_body">
-        {streamer
-          .filter((value) => value.acceptanceStatus == "accepted")
+        {events
+          // .filter((value) => value.id == loggedUser.userId )
           .map((value) => {
             return (
               <>

@@ -65,6 +65,8 @@ function App() {
   const cookies = useGetCookies();
   const getJwt = useGetDecodedJWT()
 
+  let {ReliveoJwt} = useGetCookies();
+
   //state local for logged  
   const [loggedUser, setLoggedUser] = useState({
     status: "error",
@@ -96,34 +98,38 @@ function App() {
     password: "",
   });
 
-  //become create stream data for form
-  const [localApplicationEventForm, setLocalApplicationEventForm] = useState({
-    eventType: "",
-    streamerName: "",
-    genreList: [],
-    profilePicture: [],
-    officialWebsite: "",
-    description: "",
-    identityProof: "",
-  });
-
   //handle ReliveoJwt
   useEffect(() => {
     if (Object.keys(cookies).includes("ReliveoJwt")) {
-      console.log("got cookies !", loggedUser);
+      // console.log("got cookies !", loggedUser);
       setLoggedUser(getJwt())
     }
   }, []);
 
+  useEffect(() => {
+    const ten_minutes = 10 * 60 * 1000
+    if(ReliveoJwt) {
+        const JWTdata = jose.decodeJwt(ReliveoJwt)
+        const JWTtimeleft = Date.now() - JWTdata.exp
 
-  // useEffect(() => {
-  //     setLoggedUser(jose.decodeJwt(jwt))
-  // }, []);
+        if (JWTtimeleft < ten_minutes) {
+            console.log('Uh, the token has expired, let me refresh that !')
+            try {
+                login(localUser.email, localUser.password)
+                    .then(data => {
+                        document.cookie = "ReliveoJwt" + "= " + data.token + "; expires =" + (new Date()).setDate((new Date()).getDate() + 1) + "; path=/"
+                    })
+            } catch (e) {
+                console.log("Your token is corrupted, sorry.")
+            }
+        }
+    }
+})
 
   //user not logged
   useEffect(() => {
     if (needsLogin && localUser.email !== "") {
-      console.log("login ?");
+      // console.log("login ?");
       login(localUser.email, localUser.password)
         .then(data => {
           let jwtData = jose.decodeJwt(data.token)
@@ -137,7 +143,6 @@ function App() {
               roles: jwtData.roles
             })
         })
-        setLocalUser({ password: "", email: "" })
     }
   }, [localUser]);
 
@@ -343,10 +348,10 @@ function App() {
                   path="/webapp/admin/eventManager/eventList"
                   element={<EventList />}
                 />
-                <Route
+                {/* <Route
                   path="/webapp/admin/eventManager/eventListPending"
                   element={<EventListPending />}
-                />
+                /> */}
               </Route>
             </Route>
             <Route path="/webapp/streamer/" element={< StreamerPage />}>

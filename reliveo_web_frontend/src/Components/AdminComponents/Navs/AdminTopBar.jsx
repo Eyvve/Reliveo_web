@@ -5,12 +5,22 @@ import "../adminStyle.scss"
 import {Link} from 'react-router-dom'
 import {Dropdown} from 'react-bootstrap'
 import { LogContext } from '../../../Context/Contexts';
+import { useNavigate } from 'react-router-dom';
+import useEraseCookie from '../../../Hooks/Delete/useEraseCookies';
 
 function AdminTopBar() {
+
+  const navigate = useNavigate()
+  const eraseCookie = useEraseCookie()
 
   // const [user, setUser] = useState("Gigachad");
 
   const [loggedUser, setLoggedUser] = useContext(LogContext);
+
+  const handleDisconnect = () => {
+    eraseCookie()
+    navigate("/login")
+  }
 
   return (
     <div className='Admin__topbar'>
@@ -25,8 +35,8 @@ function AdminTopBar() {
 
             <Dropdown.Menu>
               <Dropdown.Item >Profil</Dropdown.Item>
-              <Dropdown.Item >Déconnexion</Dropdown.Item>
-              <Dropdown.Item ><Link to="/" >Site vitrine</Link></Dropdown.Item>
+              <Dropdown.Item onClick={handleDisconnect}>Déconnexion</Dropdown.Item>
+              {/* <Dropdown.Item ><Link to="/" >Site vitrine</Link></Dropdown.Item> */}
             </Dropdown.Menu>
           </Dropdown>
         </div>
