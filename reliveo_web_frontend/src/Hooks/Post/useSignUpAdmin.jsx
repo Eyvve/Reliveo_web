@@ -2,15 +2,15 @@ import axios from "axios";
 
 //Add new user with role 'admin'
 export default function useSignUpAdmin() {
-    return (email, password) => {
+    return (email, username ,password , picture) => {
         return axios('https://reliveoapi.com/api/users ', {
             method: "post",
             data: {
                 email: email,
+                username: username,
                 password: password,
-                roles: ['Administrateur'],
-                username: 'username',
-                photo: "lienPhoto"
+                roles: ["ROLE_ADMINISTRATEUR"],
+                photo: picture,
 
             }
         })

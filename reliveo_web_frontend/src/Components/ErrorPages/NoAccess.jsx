@@ -5,7 +5,9 @@ function NoAccess() {
   
   return (
     <div>
-    <video src={"../../../Assets/Videos/DOG.mp4"} autoPlay="true" />
+    <video autoPlay="true" >
+      <source src="../../../Assets/Videos/DOG.mp4" type="video/mp4"/>
+    </video>
     </div>
   )
 }

@@ -21,9 +21,9 @@ function Webapp() {
               case "ROLE_ADMINISTRATEUR":
                 return navigate("/webapp/admin/userManager/userList");
               case "ROLE_DIFFUSEUR":
-                return navigate("/webapp/streamer/eventManager/eventList")
+                return navigate("/webapp/streamer/eventApplication/step1")
               default:
-                return navigate("/");
+                // return navigate("/");
             }
         }
       }, 10);

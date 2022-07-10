@@ -9,7 +9,6 @@ import { LogContext } from '../../../Context/Contexts';
 function AdminTopBar() {
 
   // const [user, setUser] = useState("Gigachad");
-  const [picture, setPicture] = useState("https://p16-sign.tiktokcdn-us.com/tos-useast5-avt-0068-tx/84428eae99c40b78a6d7dccd6805fc76~c5_720x720.jpeg?x-expires=1656122400&x-signature=bYJi5cQf5i38He9MRTdW37cB1ik%3D");
 
   const [loggedUser, setLoggedUser] = useContext(LogContext);
 

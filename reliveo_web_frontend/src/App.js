@@ -28,6 +28,7 @@ import StreamerApplications from "./Components/AdminComponents/StreamerManager/S
 import Login from "./Components/Auth/Login";
 import useGetCookies from "./Hooks/Get/useGetCookie";
 import useLogin from "./Hooks/Post/useLogin";
+import useGetDecodedJWT from "./Hooks/Get/useGetDecodedJWT"
 
 import ShowCase from "./Components/ShowCaseComponents/ShowCase";
 import StreamingApplication from "./Components/ShowCaseComponents/StreamingApplication";
@@ -62,6 +63,7 @@ function App() {
   const login = useLogin();
   //get Coockies
   const cookies = useGetCookies();
+  const getJwt = useGetDecodedJWT()
 
   //state local for logged  
   const [loggedUser, setLoggedUser] = useState({
@@ -106,21 +108,12 @@ function App() {
   });
 
   //handle ReliveoJwt
-  // useEffect(() => {
-  //   if (Object.keys(cookies).includes("ReliveoJwt")) {
-  //     console.log("got cookies !", loggedUser);
-  //     setLoggedUser((prev) => ({
-  //       ...prev,
-  //       // username: cookies.hetic_username,
-  //       token: cookies.ReliveoJwt,
-  //       // status: cookies.hetic_status,
-  //       username: "gigachad",
-  //       // token: "gigatoken",
-  //       userStatus: "ROLE_ADMINISTRATEUR",
-  //       status: "OK",
-  //     }));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (Object.keys(cookies).includes("ReliveoJwt")) {
+      console.log("got cookies !", loggedUser);
+      setLoggedUser(getJwt())
+    }
+  }, []);
 
 
   // useEffect(() => {
@@ -144,6 +137,7 @@ function App() {
               roles: jwtData.roles
             })
         })
+        setLocalUser({ password: "", email: "" })
     }
   }, [localUser]);
 

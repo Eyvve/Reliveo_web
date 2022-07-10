@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default function useDeleteUser() {
-  return ( ) => {
-    return axios("http://reliveoapi.com/api/users ", {
+  return (id ) => {
+    return axios("http://reliveoapi.com/api/users/"+ id , {
       method: "delete",
     })
       .then((res) => res.data)

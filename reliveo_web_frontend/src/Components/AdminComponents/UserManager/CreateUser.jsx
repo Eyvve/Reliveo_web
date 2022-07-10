@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
 import useSignUpUser from "../../../Hooks/Post/useSignUpUser";
+import { storage } from "../../../Firebase/firebaseConfig";
+import {ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
 
 function CreateUser() {
   const SignUp = useSignUpUser();
   const navigate = useNavigate();
 
   const [files, setFiles] = useState([]);
+  const [postTrigger, setpostTrigger] = useState("");
+  const [percent, setPercent] = useState(0);
   const [localInput, setLocalInput] = useState({
     username: "",
     email: "",
     password: "",
-    type: "",
     picture: "",
   });
 
@@ -50,7 +53,6 @@ function CreateUser() {
       <div >
         <img
           src={file.preview}
-          // onLoad={() => { URL.revokeObjectURL(file.preview) }}
           onError={(event) => event.target.style.display = 'none'}
         />
       </div>
@@ -68,15 +70,41 @@ function CreateUser() {
   useEffect(() => {
     setLocalInput(prev => ({
       ...prev,
-      picture: files[0]
+      picture: files[0]?.preview
     }))
   }, [files]);
+
+  useEffect(() => {
+    if (postTrigger != ""){
+      SignUp(localInput.email, localInput.username, localInput.password, postTrigger)
+    }
+  }, [postTrigger]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("createUser")
-    //post data for axios
-    SignUp()
+    const storageRef = ref(storage, `photoProfil/photo${files[0].name}`)
+    const uploadTask = uploadBytesResumable(storageRef, files[0]);
+    uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+            const percent = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+ 
+            // update progress
+            setPercent(percent);
+            console.log(percent)
+        },
+        (err) => console.log(err),
+        () => {
+            // download url
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                console.log(url);
+                setpostTrigger(url)
+            });
+        }
+    ); 
 
   }
   return (
@@ -91,6 +119,7 @@ function CreateUser() {
           name="username"
           onChange={handleChange}
         />
+        <p>{percent}</p>
         <label className="Admin__left_step_block_label">
           Adresse mail
         </label>
@@ -113,7 +142,7 @@ function CreateUser() {
         <label className="Admin__left_step_block_label">
         Type d’utilisateur
         </label>
-        <select name="type" className="Admin__left_step_block_input" onChange={handleChange}>
+        <select name="type" className="Admin__left_step_block_input" >
           <option value="Classique">Classique</option>
           <option value="Partenaire">Partenaire</option>
         </select>

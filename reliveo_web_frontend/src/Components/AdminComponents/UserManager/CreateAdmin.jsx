@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
 import useSignUpAdmin from "../../../Hooks/Post/useSignUpAdmin";
+import { storage } from "../../../Firebase/firebaseConfig";
+import {ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
 //create Admin
 function CreateAdmin() {
   const SignUp = useSignUpAdmin();
@@ -10,14 +12,14 @@ function CreateAdmin() {
   }, []);
   
   const [files, setFiles] = useState([]);
+  const [postTrigger, setpostTrigger] = useState("");
+  const [percent, setPercent] = useState(0);
   const [localInput, setLocalInput] = useState({
     username: "",
     email: "",
     password: "",
     picture: "",
   });
-
-  const navigate = useNavigate();
   
   useEffect(() => {
     console.log(localInput)
@@ -64,15 +66,42 @@ function CreateAdmin() {
   useEffect(() => {
     setLocalInput(prev => ({
       ...prev,
-      picture: files[0]
+      picture: files[0]?.preview
     }))
   }, [files]);
 
+  useEffect(() => {
+    if (postTrigger != ""){
+      SignUp(localInput.email, localInput.username, localInput.password, postTrigger)
+    }
+  }, [postTrigger]);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("createAdmin ");
+    console.log("createAdmin")
+    const storageRef = ref(storage, `photoProfil/photo${files[0].name}`)
+    const uploadTask = uploadBytesResumable(storageRef, files[0]);
+    uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+            const percent = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+ 
+            // update progress
+            setPercent(percent);
+            console.log(percent)
+        },
+        (err) => console.log(err),
+        () => {
+            // download url
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                console.log(url);
+                setpostTrigger(url)
+            });
+        }
+    ); }
 
-  }
   return (
     <form onSubmit={handleSubmit} className="Admin__left_step">
       <div className="Admin__left_step_block">
@@ -82,7 +111,7 @@ function CreateAdmin() {
         <input
           className="Admin__left_step_block_input"
           placeholder="Nom d'utilisateur"
-          name="pseudo"
+          name="username"
           onChange={handleChange}
         />
         <label className="Admin__left_step_block_label">
@@ -100,7 +129,7 @@ function CreateAdmin() {
         <input
           className="Admin__left_step_block_input"
           placeholder="Mot de passe"
-          name="username"
+          name="password"
           type="password"
           onChange={handleChange}
         />
