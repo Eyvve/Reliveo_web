@@ -13,6 +13,7 @@ function EventList() {
     const getEventList = useGetEventList();
 
     const [events, setEvents] = useState([]);
+    const [today, setToday] = useState("");
 
     const [displayDetail, setDisplayDetail] = useState(false);
     const handleViewDetail = (id) => {
@@ -25,6 +26,12 @@ function EventList() {
     }
 
     useEffect(() => {
+      const date = Moment().format('DD MM yyyy')
+      setToday(date)
+      console.log(date)
+    }, []);
+
+    useEffect(() => {
       getEventList()
           .then(data => setEvents(data))
   }, [events]);
@@ -32,7 +39,7 @@ function EventList() {
     return (
       <div className="Admin__Manager_List">
         <div className="Admin__Manager_List_body">
-          {events.map((value) => {
+          {events?.map((value) => {
               return (
                 <>
                   <div key={value.id} className="Admin__Manager_List_body_event">
@@ -46,7 +53,7 @@ function EventList() {
                     </div>
                     <div>
 
-                    <p  className="Admin__Manager_List_body_event_info">{Moment(value.dateStart).format('DD MM yyyy')} <TodayEvent /></p>
+                    <p  className="Admin__Manager_List_body_event_info">{Moment(value.dateStart).format('DD MM yyyy')} {Moment(value.dateStart).format('DD MM yyyy') == today ? <TodayEvent /> : ""}</p>
                     </div>
                     <Detail
                       className="pointing"

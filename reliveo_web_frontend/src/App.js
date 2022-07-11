@@ -53,8 +53,8 @@ import MyEventList from "./Components/StreamerComponents/MyEventList";
 import StreamSetup from "./Components/StreamerComponents/StreamSetup";
 
 import ApplicationEventStep1 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep1";
-import ApplicationEventStep2 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep2";
-import ApplicationEventStep3 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep3";
+// import ApplicationEventStep2 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep2";
+// import ApplicationEventStep3 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep3";
 import ApplicationEventStep4 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep4";
 import CreateAdmin from "./Components/AdminComponents/UserManager/CreateAdmin";
 
@@ -263,7 +263,7 @@ function App() {
                   />
                 }
               />
-              <Route
+              {/* <Route
                 path="/webapp/streamer/eventApplication/step2"
                 element={
                   <ApplicationEventStep2
@@ -283,7 +283,7 @@ function App() {
                     importedPPData={localApplicationForm.profilePicture}
                   />
                 }
-              />
+              /> */}
               <Route
                 path="/webapp/streamer/eventApplication/step4"
                 element={

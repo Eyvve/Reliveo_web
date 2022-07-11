@@ -5,6 +5,7 @@ import useDeleteContent from '../../../Hooks/Delete/useDeleteContent'
 // import useGetById from '../../../Hooks/Get/useGetById'
 import useGetUsers from '../../../Hooks/Get/useGetUsers'
 import Moment from "moment"
+import useGetEventList from '../../../Hooks/Get/useGetEventList'
 
 
 function ContentList() {
@@ -15,9 +16,11 @@ function ContentList() {
 
     const getContent = useGetContentList()
     const getUsers = useGetUsers()
+    const getEvents = useGetEventList()
     const deleteContent = useDeleteContent()
     const [content, setContent] = useState([]);
     const [user, setUser] = useState([]);
+    const [events, setEvents] = useState([]);
 
     useEffect(() => {
         if(user.length == 0){
@@ -25,6 +28,13 @@ function ContentList() {
         }
         console.log(user)
     }, [user]);
+    
+    useEffect(() => {
+        if(events.length == 0){
+            getEvents().then(data => setEvents(data))
+        }
+        console.log(user)
+    }, [events]);
 
     useEffect(() => {
         getContent()
@@ -43,6 +53,7 @@ function ContentList() {
                 <div className='Admin__Manager_List_head ContentList'>
                         <div>Id</div>
                         <div>Auteur</div>
+                        <div>Lien</div>
                         <div>Evènement</div>
                         <div>Date</div>
                 </div>
@@ -52,9 +63,11 @@ function ContentList() {
                             <>
                                 <div  key={value.id} className='Admin__Manager_List_body_row ContentList'>
                                     <div>{value.id}</div>
-                                    {/* <div>{user?.filter(key => "/api/users/" + key.id == value?.author)[0]['username']}</div> */}
-                                    <div>{value.author}</div>
-                                    <div>{value.event}</div>
+                                    <div>{user?.filter(key => "/api/users/" + key.id == value?.author)[0]?.username}</div>
+                                    <div><a href={value.videoUrl} style={{color: "#A65AFF", fontWeight: "600"}}  target="_blank" >Lien</a></div>
+                                    <div>{events?.filter(key => "/api/events/" + key.id == value?.event)[0]?.name}</div>
+                                    {/* <div>{value.author}</div> */}
+                                    {/* <div>{value.event}</div> */}
                                     <div>{Moment(value.timestampEnd).format('DD MMMM yyyy')}</div>
                                     <div><Delete className="pointing" onClick={() => handleDeleteContent(value.id)} /></div>
                                 </div>

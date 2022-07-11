@@ -7,8 +7,6 @@ function LoginForm({localUser, setLocalUser, needsLogin, setNeedsLogin, setLogge
 
     const navigate = useNavigate()
 
-    const login = useLogin();
-
     const [formInput, setFormInput] = useState({
         email: "",
         password: '',
