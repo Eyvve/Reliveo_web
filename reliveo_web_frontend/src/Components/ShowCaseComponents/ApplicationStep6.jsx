@@ -15,15 +15,15 @@ function ApplicationStep6({importedData, eventType, streamerName, genreList, off
     return navigate('/streamingApplication/step5')
   })
 
-  const handleNext = (e => {
+  const handleNext = (e) => {
     return navigate('/streamingApplication/step7')
-  })
+  }
 
-  const handleApply = (e => {
+  const handleApply = (e) => {
     createUser(importedData.email, importedData.streamerName, importedData.password, importedData.profilePicture).then(data => setUserId(data.id))
-      console.log(userId)
     createStreamer(importedData,userId)
-  })
+    handleNext()
+  }
 
 
   return (
