@@ -8,7 +8,6 @@ import { eventType } from '../../Data/data'
 
 function ApplicationStep1({setLocalApplicationForm, importedData}) {
 
-  
   const navigate = useNavigate()
 
   const [localEventType, setlocalEventType] = useState({value: 'default', label: "Select..."});

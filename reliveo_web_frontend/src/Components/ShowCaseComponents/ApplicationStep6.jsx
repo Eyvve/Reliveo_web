@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
+import useCreateStreamer from "../../Hooks/Post/useCreateStreamer";
+import useSignUpUser from "../../Hooks/Post/useSignUpUser";
+import useSignUpUserStreamer from "../../Hooks/Post/useSignUpUserStreamer";
 
-function ApplicationStep6({localApplicationForm, eventType, streamerName, genreList, profilePicture, officialWebsite, description, identityProof, importedEmailData}) {
+function ApplicationStep6({importedData, eventType, streamerName, genreList, officialWebsite, description, identityProof, importedEmailData}) {
 
   const navigate = useNavigate()
+  const createUser = useSignUpUserStreamer()
+  const createStreamer = useCreateStreamer()
+  const [userId,setUserId] = useState()
 
   const handlePrevious = (e => {
     return navigate('/streamingApplication/step5')
@@ -14,12 +20,11 @@ function ApplicationStep6({localApplicationForm, eventType, streamerName, genreL
   })
 
   const handleApply = (e => {
-    
+    createUser(importedData.email, importedData.streamerName, importedData.password, importedData.profilePicture).then(data => setUserId(data.id))
+      console.log(userId)
+    createStreamer(importedData,userId)
   })
 
-  useEffect(() => {
-    console.log(identityProof)
-  }, []);
 
   return (
     <section className='Application__left_step'>
@@ -42,10 +47,6 @@ function ApplicationStep6({localApplicationForm, eventType, streamerName, genreL
                 <td>{genreList.map((genre, index) => {
                    return <p key={index}>{genre.value}</p>
                 })}</td>
-            </tr>
-            <tr>
-                <td>Image de profil</td>
-                <td>{profilePicture[0]?.path}</td>
             </tr>
             <tr>
                 <td>Lien vers le site</td>

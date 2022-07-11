@@ -18,17 +18,15 @@ function EventList() {
     const [displayDetail, setDisplayDetail] = useState(false);
     const handleViewDetail = (id) => {
       setDisplayDetail(id);
-      console.log(id);
     };
+
     const  handleCloseViewDetail = () => {
       setDisplayDetail(false);
-      console.log(displayDetail);
     }
 
     useEffect(() => {
       const date = Moment().format('DD MM yyyy')
       setToday(date)
-      console.log(date)
     }, []);
 
     useEffect(() => {
@@ -58,14 +56,14 @@ function EventList() {
                     <Detail
                       className="pointing"
                       style={
-                          displayDetail == value.id ? { display: "none" } : { display: "block" }
+                          displayDetail === value.id ? { display: "none" } : { display: "block" }
                         }
                       onClick={() => handleViewDetail(value.id)}
                     />
                     <CloseDetail
                       className="pointing"
                       style={
-                        displayDetail == value.id ? { display: "block" } : { display: "none" }
+                        displayDetail === value.id ? { display: "block" } : { display: "none" }
                         }
                       onClick={() => handleCloseViewDetail(value.id)}
                     />
@@ -73,7 +71,7 @@ function EventList() {
                   <div
                     className="Admin__Manager_List_body_detail"
                     style={
-                      displayDetail == value.id ? { display: "block" } : { display: "none" }
+                      displayDetail === value.id ? { display: "block" } : { display: "none" }
                     }
                   >
                     <div className="Admin__Manager_List_body_detail_info">

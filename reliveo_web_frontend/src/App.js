@@ -19,7 +19,6 @@ import ContentManager from "./Components/AdminComponents/ContentManager/ContentM
 
 import EventManager from "./Components/AdminComponents/EventManager/EventManager";
 import EventList from "./Components/AdminComponents/EventManager/EventList";
-import EventApplications from "./Components/AdminComponents/EventManager/EventApplications";
 
 import StreamerManager from "./Components/AdminComponents/StreamerManager/StreamerManager";
 import StreamerList from "./Components/AdminComponents/StreamerManager/StreamerList";
@@ -40,21 +39,12 @@ import ApplicationStep5 from "./Components/ShowCaseComponents/ApplicationStep5";
 import ApplicationStep6 from "./Components/ShowCaseComponents/ApplicationStep6";
 import ApplicationStep7 from "./Components/ShowCaseComponents/ApplicationStep7";
 
-import StreamerTopBar from "./Components/StreamerComponents/StreamerTopBar";
-import StreamerSideBar from "./Components/StreamerComponents/StreamerSideBar";
 import AppIndex from "./Components/Index/AppIndex";
-import MyEventManager from "./Components/StreamerComponents/MyEventList";
-import MyEventApplication from "./Components/StreamerComponents/MyEventApplication";
-import useGetEventList from "./Hooks/Get/useGetEventList";
-import EventListPending from "./Components/AdminComponents/EventManager/EventListPending";
-
 import StreamerPage from "./Components/StreamerComponents/StreamerPage";
 import MyEventList from "./Components/StreamerComponents/MyEventList";
 import StreamSetup from "./Components/StreamerComponents/StreamSetup";
 
 import ApplicationEventStep1 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep1";
-// import ApplicationEventStep2 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep2";
-// import ApplicationEventStep3 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep3";
 import ApplicationEventStep4 from "./Components/StreamerComponents/StreamerCreateEvent/ApplicationEventStep4";
 import CreateAdmin from "./Components/AdminComponents/UserManager/CreateAdmin";
 
@@ -90,7 +80,7 @@ function App() {
     eventType: "",
     streamerName: "",
     genreList: [],
-    profilePicture: [],
+    profilePicture: "",
     officialWebsite: "",
     description: "",
     identityProof: "",
@@ -101,7 +91,6 @@ function App() {
   //handle ReliveoJwt
   useEffect(() => {
     if (Object.keys(cookies).includes("ReliveoJwt")) {
-      // console.log("got cookies !", loggedUser);
       setLoggedUser(getJwt())
     }
   }, []);
@@ -129,7 +118,6 @@ function App() {
   //user not logged
   useEffect(() => {
     if (needsLogin && localUser.email !== "") {
-      // console.log("login ?");
       login(localUser.email, localUser.password)
         .then(data => {
           let jwtData = jose.decodeJwt(data.token)

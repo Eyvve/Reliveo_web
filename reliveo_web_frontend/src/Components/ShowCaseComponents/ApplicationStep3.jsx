@@ -1,12 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 import { useNavigate } from 'react-router-dom';
+import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
+import {storage} from "../../Firebase/firebaseConfig";
 
 function ApplicationStep3({setLocalApplicationForm, importedPPData}) {
 
   const [files, setFiles] = useState([]);
     
   const navigate = useNavigate()
+  const [trigger1, setTrigger1] = useState(false);
+  const [trigger2, setTrigger2] = useState(false);
+  const [trigger, setTrigger] = useState(false);
+  const [percent, setPercent] = useState(0);
 
   const {getRootProps, getInputProps} = useDropzone({
     accept: {
@@ -50,9 +56,37 @@ function ApplicationStep3({setLocalApplicationForm, importedPPData}) {
     return navigate('/streamingApplication/step2')
     })
 
-    const handleNext = (e => {
-      return navigate('/streamingApplication/step4')
-    })
+    const handleSubmit = async (e) => {
+        const storagePictureRef = ref(storage, `photoProfil/photo${files.name}`)
+        const uploadPictureTask = uploadBytesResumable(storagePictureRef, files[0]);
+        uploadPictureTask.on(
+            "state_changed",
+            (snapshot) => {
+                const percent = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+
+                // update progress
+                setPercent(percent);
+                console.log(percent)
+            },
+            (err) => console.log(err),
+            () => {
+                // download url
+                getDownloadURL(uploadPictureTask.snapshot.ref).then((url) => {
+                    setLocalApplicationForm(prev => ({
+                        ...prev,
+                        profilePicture: url
+                    }))
+                });
+            })
+
+        await handleNext(e);
+    }
+
+    const handleNext = (e) => {
+        return navigate('/streamingApplication/step4')
+    }
 
   return (
     <section className='Application__left_step'>
@@ -75,7 +109,7 @@ function ApplicationStep3({setLocalApplicationForm, importedPPData}) {
           Précédent
         </button>
         <button className='Application__left_step_buttons_button next' 
-        onClick={handleNext}>
+        onClick={handleSubmit}>
           Suivant
         </button>
       </div>
